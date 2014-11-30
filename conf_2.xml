@@ -1,0 +1,7 @@
+<ECView Type="2">
+	<fan MinFanduty="30">
+		<range Num="1" AddPercentage="-5" InferiorLimit="40"></range>
+		<range Num="2" AddPercentage="0" InferiorLimit="50"></range>
+		<range Num="3" AddPercentage="5" InferiorLimit="60"></range>
+	</fan>
+</ECView>

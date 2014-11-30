@@ -1,0 +1,100 @@
+﻿<Window x:Class="ECView.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:data="clr-namespace:ECView.Pages.Binding"
+        Title="Clevo ECView" Height="350" Width="500" WindowStyle="ToolWindow">
+    <Grid Name="ECViewGrid">
+        <Grid.Resources>
+            <data:ECViewBinding x:Key="ecViewDataBind"></data:ECViewBinding>
+        </Grid.Resources>
+        <Grid.DataContext>
+            <Binding Source="{StaticResource ecViewDataBind}"></Binding>
+        </Grid.DataContext>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="1"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Height="25">
+                <MenuItem.Header>
+                    <TextBlock Text="选项" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="14"></TextBlock>
+                </MenuItem.Header>
+                <CheckBox Name="AutoRunChkBox" Content="开机启动" IsChecked="{Binding Path=IsAutoRun}" Checked="IsAutoRunChecked" Unchecked="IsAutoRunUnChecked" FontSize="14"></CheckBox>
+                <CheckBox Name="BackRunChkBox" Content="关闭到托盘" IsChecked="{Binding Path=IsBackRun}" Checked="IsBackRunChecked" Unchecked="IsBackRunUnChecked" FontSize="14"></CheckBox>
+                <MenuItem Click="ExitApp_Click">
+                    <MenuItem.Header>
+                        <TextBlock Text="退出" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Center" FontSize="14"></TextBlock>
+                    </MenuItem.Header>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Height="25">
+                <MenuItem.Header>
+                    <TextBlock Text="帮助" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="14"></TextBlock>
+                </MenuItem.Header>
+                <MenuItem Click="Aboout_Click">
+                    <MenuItem.Header>
+                        <TextBlock Text="关于" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Center" FontSize="14"></TextBlock>
+                    </MenuItem.Header>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <TextBlock Grid.Row="1" Text="Clevo ECView（风扇转速控制软件）" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <Rectangle Grid.Row="2" Fill="#aaa" VerticalAlignment="Top" Height="1" Margin="20,0,20,0"/>
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="{Binding Path=NbModel}" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0"></TextBlock>
+            <TextBlock Grid.Row="1" Text="{Binding Path=ECVersion}" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0"></TextBlock>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="1" Content="CPU温度：" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <Label Grid.Column="2" Content="{Binding Path=CpuRemote}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Label Grid.Column="3" Content="主板温度：" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <Label Grid.Column="4" Content="{Binding Path=CpuLocal}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+            </Grid>
+            <DataGrid Name="ECDataGrid" Grid.Row="3" Grid.RowSpan="3" FontSize="14" AutoGenerateColumns="False" ItemsSource="{Binding}" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Hyperlink.Click="ECEditor_Click">
+                <DataGrid.Resources>
+                    <data:ECViewCollec x:Key="ecviewDataListBind"></data:ECViewCollec>
+                </DataGrid.Resources>
+                <DataGrid.DataContext>
+                    <Binding Source="{StaticResource ecviewDataListBind}"></Binding>
+                </DataGrid.DataContext>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="0.5*" Binding="{Binding Path=FanNo}" IsReadOnly="True">
+                        <DataGridTextColumn.Header>
+                            <DataGridColumnHeader Content="风扇序号"></DataGridColumnHeader>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="1*" Binding="{Binding Path=FanDutyStr}">
+                        <DataGridTextColumn.Header>
+                            <DataGridColumnHeader Content="风扇转速"></DataGridColumnHeader>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="1.5*" Binding="{Binding Path=FanSet}">
+                        <DataGridTextColumn.Header>
+                            <DataGridColumnHeader Content="风扇当前配置"></DataGridColumnHeader>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridHyperlinkColumn Width="0.5*" Binding="{Binding Path=Ope}">
+                        <DataGridHyperlinkColumn.Header>
+                            <DataGridColumnHeader Content="操作"></DataGridColumnHeader>
+                        </DataGridHyperlinkColumn.Header>
+                    </DataGridHyperlinkColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>

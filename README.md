@@ -3,10 +3,19 @@ Clevo-ECView
 
 Clevo ECviewer and FanDuty Controller
 
-Visual Studio 2010
-Visual C# WPF &amp; Setup Project
+<s>Visual Studio 2010</s>
+Visual Studio 2012
+Visual C# WPF &amp; <s>Setup Project</s>InstallShield LE Setup Project
 
 NOTICE: This project is in Chinese(Simplified)
+
+Update NOTE(WIP):
+2014.12.04 Tur.
+
+1.Update project to VS2012
+2.Delete original Visual Studio Setup Project
+3.Add InstallShield LE Setup Project
+==================================================================
 
 Release NOTE:
 2014.11.30 Sun.

@@ -40,7 +40,11 @@ namespace ECView.Tools
                     reg.Close();
             }
         }
-
+        /// <summary>
+        /// 检测服务运行状态
+        /// </summary>
+        /// <param name="serviceName"></param>
+        /// <returns></returns>
         public static int CheckServiceState(string serviceName)
         {
             ServiceController[] service = ServiceController.GetServices();

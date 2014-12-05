@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECView", "ECView\ECView.csproj", "{66A0097B-7BAB-428C-BCF0-31977BAE8375}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECViewService", "ECViewService\ECViewService.csproj", "{B396BA6D-C8A4-49CB-AF6D-E5E769DC4093}"
@@ -10,6 +12,8 @@ Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Setup", "Setup\Setup.isproj
 		{B396BA6D-C8A4-49CB-AF6D-E5E769DC4093} = {B396BA6D-C8A4-49CB-AF6D-E5E769DC4093}
 		{66A0097B-7BAB-428C-BCF0-31977BAE8375} = {66A0097B-7BAB-428C-BCF0-31977BAE8375}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECLib", "ECLib\ECLib.csproj", "{C777ECDB-E151-4D39-833A-FE44509F38DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -110,6 +114,31 @@ Global
 		{11689AF1-ED81-454F-889E-AAFC5A762299}.SingleImage|Mixed Platforms.Build.0 = SingleImage
 		{11689AF1-ED81-454F-889E-AAFC5A762299}.SingleImage|x86.ActiveCfg = SingleImage
 		{11689AF1-ED81-454F-889E-AAFC5A762299}.SingleImage|x86.Build.0 = SingleImage
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.CD_ROM|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.CD_ROM|Mixed Platforms.Build.0 = Release|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.CD_ROM|x86.ActiveCfg = Release|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.DVD-5|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.DVD-5|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.DVD-5|x86.ActiveCfg = Debug|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.Release|x86.ActiveCfg = Release|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.SingleImage|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.SingleImage|Mixed Platforms.Build.0 = Release|Any CPU
+		{C777ECDB-E151-4D39-833A-FE44509F38DD}.SingleImage|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

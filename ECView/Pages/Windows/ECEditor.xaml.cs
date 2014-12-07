@@ -27,11 +27,8 @@ namespace ECView.Pages.Windows
         int index;
         int fanSetModel;
         IFanDutyModify iFanDutyModify;
-        //结果显示计时器
-        DispatcherTimer revealTimer;
-        DispatcherTimer setTimer;
 
-        public ECEditor(MainWindow main, int index, int fanduty, int fanSetModel, DispatcherTimer revealTimer, DispatcherTimer setTimer)
+        public ECEditor(MainWindow main, int index, int fanduty, int fanSetModel)
         {
             InitializeComponent();
             ecBinding = (ECEditorBinding)ECEditGrid.DataContext;
@@ -39,8 +36,6 @@ namespace ECView.Pages.Windows
             this.main = main;
             this.index = index;
             this.fanSetModel = fanSetModel;
-            this.revealTimer = revealTimer;
-            this.setTimer = setTimer;
             //界面初始化
             InitEcData(fanduty);
         }
@@ -76,8 +71,6 @@ namespace ECView.Pages.Windows
         /// <returns></returns>
         protected override void OnClosed(EventArgs e)
         {
-            revealTimer.Start();
-            setTimer.Start();
             base.OnClosed(e);
         }
         //////////////////////////////////////////////////////界面事件//////////////////////////////////////////////////////

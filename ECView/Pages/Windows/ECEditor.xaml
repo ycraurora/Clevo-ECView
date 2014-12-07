@@ -36,7 +36,7 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
-            <GroupBox Grid.Row="0" Header="手动调节" FontSize="14" IsEnabled="{Binding Path=IsEnabled}">
+            <GroupBox Grid.Row="0" Header="手动调节" FontSize="14">
                 <Grid Name="ManuSet">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -49,7 +49,7 @@
                     <Label Grid.Column="2" Content="%" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16"></Label>
                 </Grid>
             </GroupBox>
-            <GroupBox Grid.Row="1" Header="智能调节" FontSize="14" IsEnabled="{Binding Path=IsEnabled}">
+            <GroupBox Grid.Row="1" Header="智能调节" FontSize="14">
                 <Grid Name="InteSet">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>

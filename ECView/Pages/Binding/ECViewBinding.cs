@@ -20,38 +20,6 @@ namespace ECView.Pages.Binding
     public class ECViewBinding : PropertyChangeBase
     {
         /// <summary>
-        /// 自启动标识
-        /// </summary>
-        private bool _isAutoRun;
-        public bool IsAutoRun
-        {
-            set
-            {
-                _isAutoRun = value;
-                Notify("IsAutoRun");
-            }
-            get
-            {
-                return _isAutoRun;
-            }
-        }
-        /// <summary>
-        /// 最小化到托盘标识
-        /// </summary>
-        private bool _isBackRun;
-        public bool IsBackRun
-        {
-            set
-            {
-                _isBackRun = value;
-                Notify("IsBackRun");
-            }
-            get
-            {
-                return _isBackRun;
-            }
-        }
-        /// <summary>
         /// 模具型号
         /// </summary>
         private string _nbModel;
@@ -133,22 +101,6 @@ namespace ECView.Pages.Binding
         }
         /// <summary>
         /// CPU温度
-        /// </summary>
-        private string _cpuLocal;
-        public string CpuLocal
-        {
-            set
-            {
-                _cpuLocal = value;
-                Notify("CpuLocal");
-            }
-            get
-            {
-                return _cpuLocal;
-            }
-        }
-        /// <summary>
-        /// 主板温度
         /// </summary>
         private string _cpuRemote;
         public string CpuRemote

@@ -19,18 +19,6 @@
         <Menu>
             <MenuItem Height="25">
                 <MenuItem.Header>
-                    <TextBlock Text="选项" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="14"></TextBlock>
-                </MenuItem.Header>
-                <CheckBox Name="AutoRunChkBox" Content="开机启动" IsChecked="{Binding Path=IsAutoRun}" Checked="IsAutoRunChecked" Unchecked="IsAutoRunUnChecked" FontSize="14"></CheckBox>
-                <CheckBox Name="BackRunChkBox" Content="关闭到托盘" IsChecked="{Binding Path=IsBackRun}" Checked="IsBackRunChecked" Unchecked="IsBackRunUnChecked" FontSize="14"></CheckBox>
-                <MenuItem Click="ExitApp_Click">
-                    <MenuItem.Header>
-                        <TextBlock Text="退出" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Center" FontSize="14"></TextBlock>
-                    </MenuItem.Header>
-                </MenuItem>
-            </MenuItem>
-            <MenuItem Height="25">
-                <MenuItem.Header>
                     <TextBlock Text="帮助" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="14"></TextBlock>
                 </MenuItem.Header>
                 <MenuItem Click="Aboout_Click">
@@ -61,9 +49,8 @@
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="1" Content="CPU温度：" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
-                <Label Grid.Column="2" Content="{Binding Path=CpuRemote}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-                <Label Grid.Column="3" Content="主板温度：" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
-                <Label Grid.Column="4" Content="{Binding Path=CpuLocal}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Label Grid.Column="2" Content="{Binding Path=CpuRemote}" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
+                <Button Grid.Column="4" Name="addBtn" Content="添加风扇" FontSize="14" Height="25" Width="60" Click="addBtn_Click"></Button>
             </Grid>
             <DataGrid Name="ECDataGrid" Grid.Row="3" Grid.RowSpan="3" FontSize="14" AutoGenerateColumns="False" ItemsSource="{Binding}" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Hyperlink.Click="ECEditor_Click">
                 <DataGrid.Resources>

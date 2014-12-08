@@ -1,8 +1,5 @@
-﻿using ECView.DataDefinitions;
-using ECView.Module;
-using ECView.Pages.Binding;
+﻿using ECView.Pages.Binding;
 using ECView.Pages.Windows;
-using ECView.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +7,7 @@ using System.Management;
 using System.Reflection;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -28,14 +26,14 @@ namespace ECView
     /// </summary>
     public partial class MainWindow : Window
     {
-        //功能接口
-        IFanDutyModify iFanDutyModify;
         //主窗口绑定
-        ECViewBinding ecviewData;
+        ECViewBinding ecviewData = null;
         //数据列表绑定
-        ECViewCollec ecviewDataList;
+        ECViewCollec ecviewDataList = null;
         //当前工作目录
-        string currentDirectory;
+        string currentDirectory = "";
+        //线程任务
+        Task<int> tempGetter = null;
         /// <summary>
         /// 子窗口传参
         /// </summary>
@@ -54,12 +52,15 @@ namespace ECView
         public MainWindow()
         {
             InitializeComponent();
-            iFanDutyModify = ModuleFactory.GetFanDutyModifyModule();
+            //数据绑定
             ecviewData = (ECViewBinding)ECViewGrid.DataContext;
             ecviewDataList = (ECViewCollec)ECDataGrid.DataContext;
+            //当前工作目录
             currentDirectory = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-
+            //初始化数据
             InitECData();
+            //CPU更新线程
+            _getTemp_Task();
         }
         /// <summary>
         /// 初始化数据
@@ -73,10 +74,10 @@ namespace ECView
 
             //EC版本
             ecviewData.ECVersion = "当前EC版本为：1.";
-            ecviewData.ECVersion += iFanDutyModify.GetECVersion();
+            ecviewData.ECVersion += ECLib.FanCtrl.GetECVersion();
 
             //风扇数量
-            FANCount = iFanDutyModify.GetFanCount();
+            FANCount = ECLib.FanCtrl.GetFanCount();
             if (FANCount > 4)
                 FANCount = 0;
             if (FANCount == 0)
@@ -84,55 +85,66 @@ namespace ECView
             //判断配置文件是否存在
             if (System.IO.File.Exists(currentDirectory + "ecview.cfg"))
             {
-                List<ConfigPara> configParaList = iFanDutyModify.ReadCfgFile(currentDirectory + "ecview.cfg");
+                List<ECLib.FanCtrl.ConfigPara> configParaList = ECLib.FanCtrl.ReadCfgFile(currentDirectory + "ecview.cfg");
                 //风扇转速与温度信息
-                for (int i = 0; i < FANCount; i++)
+                for (int i = 0; i < configParaList.Count; i++)
                 {
-                    int[] ecData = iFanDutyModify.GetTempFanDuty(i + 1);
-                    ecviewData.FanNo = i + 1;
-                    foreach (ConfigPara configPara in configParaList)
+                    ECViewBinding ec = new ECViewBinding();
+                    int[] ecData = ECLib.FanCtrl.GetTempFanDuty(i + 1);
+                    ec.FanNo = i + 1;
+                    foreach (ECLib.FanCtrl.ConfigPara configPara in configParaList)
                     {
-                        if (ecviewData.FanNo == configPara.FanNo)
+                        if (ec.FanNo == configPara.FanNo)
                         {
-                            ecviewData.FanSetModel = configPara.SetMode;
-                            ecviewData.FanSet = configPara.FanSet;
+                            ec.FanSetModel = configPara.SetMode;
+                            ec.FanSet = configPara.FanSet;
                             if (configPara.SetMode == 1)
                             {
                                 //若上次配置为自动调节，设置风扇自动调节
-                                ecData = iFanDutyModify.SetFanduty(configPara.FanNo, 0, true);
+                                ecData = ECLib.FanCtrl.SetFanduty(configPara.FanNo, 0, true);
                             }
                             else if (configPara.SetMode == 2)
                             {
                                 //若为上次配置手动调节，设置风扇转速
-                                ecData = iFanDutyModify.SetFanduty(configPara.FanNo, (int)(configPara.FanDuty * 2.55m), false);
+                                ecData = ECLib.FanCtrl.SetFanduty(configPara.FanNo, (int)(configPara.FanDuty * 2.55m), false);
                             }
                             else { }
                         }
                     }
                     ecviewData.CpuRemote = ecData[1] + "℃";
                     ecviewData.UpdateFlag = false;
-                    ecviewData.FanDutyStr = ecData[2] + "%";
-                    ecviewData.FanDuty = ecData[2];
-                    ecviewData.Ope = "设置";
-                    ecviewDataList.Add(ecviewData);
+                    ec.FanDutyStr = ecData[2] + "%";
+                    ec.FanDuty = ecData[2];
+                    ec.Ope = "设置";
+                    ecviewDataList.Add(ec);
                 }
             }
             else
             {
+                List<ECLib.FanCtrl.ConfigPara> configParaList = new List<ECLib.FanCtrl.ConfigPara>();
                 //风扇转速与温度信息
                 for (int i = 0; i < FANCount; i++)
                 {
-                    int[] ecData = iFanDutyModify.GetTempFanDuty(i + 1);
+                    ECViewBinding ec = new ECViewBinding();
+                    int[] ecData = ECLib.FanCtrl.GetTempFanDuty(i + 1);
                     ecviewData.CpuRemote = ecData[1] + "℃";
-                    ecviewData.FanDutyStr = ecData[2] + "%";
-                    ecviewData.FanDuty = ecData[2];
-                    ecviewData.FanNo = i + 1;
-                    ecviewData.FanSet = "未设置";
-                    ecviewData.FanSetModel = 0;
-                    ecviewData.Ope = "设置";
+                    ec.FanDutyStr = ecData[2] + "%";
+                    ec.FanDuty = ecData[2];
+                    ec.FanNo = i + 1;
+                    ec.FanSet = "未设置";
+                    ec.FanSetModel = 0;
+                    ec.Ope = "设置";
                     ecviewData.UpdateFlag = false;
-                    ecviewDataList.Add(ecviewData);
+                    ecviewDataList.Add(ec);
+                    //保存配置
+                    ECLib.FanCtrl.ConfigPara configPara = new ECLib.FanCtrl.ConfigPara();
+                    configPara.FanNo = ec.FanNo;
+                    configPara.SetMode = ec.FanSetModel;
+                    configPara.FanSet = ec.FanSet;
+                    configPara.FanDuty = ec.FanDuty;
+                    configParaList.Add(configPara);
                 }
+                ECLib.FanCtrl.WriteCfgFile(currentDirectory + "ecview.cfg", configParaList);
             }
         }
         /// <summary>
@@ -144,20 +156,17 @@ namespace ECView
             {
                 if (ecviewDataList[i].UpdateFlag)
                 {
-                    List<ConfigPara> configParaList = new List<ConfigPara>();
+                    List<ECLib.FanCtrl.ConfigPara> configParaList = new List<ECLib.FanCtrl.ConfigPara>();
                     foreach (ECViewBinding ec in ecviewDataList)
                     {
-                        ConfigPara configPara = new ConfigPara();
+                        ECLib.FanCtrl.ConfigPara configPara = new ECLib.FanCtrl.ConfigPara();
                         configPara.FanNo = ec.FanNo;
                         configPara.SetMode = ec.FanSetModel;
                         configPara.FanSet = ec.FanSet;
                         configPara.FanDuty = ec.FanDuty;
                         configParaList.Add(configPara);
                     }
-                    //获取当前路径
-                    string currentDirectory = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-                    iFanDutyModify.WriteCfgFile(currentDirectory + "ecview.cfg", configParaList);
-                    Thread.Sleep(1000);
+                    ECLib.FanCtrl.WriteCfgFile(currentDirectory + "ecview.cfg", configParaList);
                 }
                 ecviewDataList[i].UpdateFlag = false;
             }
@@ -174,7 +183,7 @@ namespace ECView
             var datagrid = sender as System.Windows.Controls.DataGrid;
             int index = datagrid.SelectedIndex;
             ECViewBinding selectFan = (ECViewBinding)datagrid.SelectedItem;
-            int fanduty = iFanDutyModify.GetTempFanDuty(index + 1)[2];
+            int fanduty = ECLib.FanCtrl.GetTempFanDuty(index + 1)[2];
             //加载窗体
             ECEditor ecWindow = new ECEditor(this, index, fanduty, selectFan.FanSetModel);
             ecWindow.ShowDialog();
@@ -209,19 +218,31 @@ namespace ECView
                 if (res == MessageBoxResult.OK)
                 {
 
-                    ECViewBinding ecviewBinding = new ECViewBinding();
-                    int[] ecData = iFanDutyModify.GetTempFanDuty(newFanNo);
-                    ecviewBinding.CpuRemote = ecData[1] + "℃";
-                    ecviewBinding.FanDutyStr = ecData[2] + "%";
-                    ecviewBinding.FanDuty = ecData[2];
-                    ecviewBinding.FanNo = newFanNo;
-                    ecviewBinding.FanSet = "未设置";
-                    ecviewBinding.FanSetModel = 0;
-                    ecviewBinding.Ope = "设置";
-                    ecviewBinding.UpdateFlag = false;
-                    ecviewDataList.Add(ecviewBinding);
+                    ECViewBinding ec = new ECViewBinding();
+                    int[] ecData = ECLib.FanCtrl.GetTempFanDuty(newFanNo);
+                    ec.CpuRemote = ecData[1] + "℃";
+                    ec.FanDutyStr = ecData[2] + "%";
+                    ec.FanDuty = ecData[2];
+                    ec.FanNo = newFanNo;
+                    ec.FanSet = "未设置";
+                    ec.FanSetModel = 0;
+                    ec.Ope = "设置";
+                    ec.UpdateFlag = true;
+                    ecviewDataList.Add(ec);
                 }
             }
+        }
+        /// <summary>
+        /// 移除受控风扇
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void rmvBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var datagrid = sender as System.Windows.Controls.DataGrid;
+            int index = datagrid.SelectedIndex;
+            ECViewBinding selectFan = (ECViewBinding)datagrid.SelectedItem;
+            ecviewDataList.Remove(selectFan);
         }
         ////////////////////////////////////////////////////////私有方法////////////////////////////////////////////////////////
         /// <summary>
@@ -230,6 +251,34 @@ namespace ECView
         private void _exit()
         {
             System.Windows.Application.Current.Shutdown();
+        }
+        /// <summary>
+        /// CPU温度更新线程
+        /// </summary>
+        private void _getTemp_Task()
+        {
+            tempGetter = new Task<int>(() => { return _tempGetter(); });
+            tempGetter.Start();
+        }
+        /// <summary>
+        /// 更新CPU温度
+        /// </summary>
+        private int _tempGetter()
+        {
+            try
+            {
+                while (true)
+                {
+                    int[] temp = ECLib.FanCtrl.GetTempFanDuty(1);
+                    ecviewData.CpuRemote = temp[0] + "℃";
+                    CheckUpdate();
+                    Thread.Sleep(5000);
+                }
+            }
+            catch
+            {
+                return 0;
+            }
         }
     }
 }

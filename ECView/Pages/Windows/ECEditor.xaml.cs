@@ -11,7 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ECView.Pages.Binding;
-using ECView.Module;
 using System.IO;
 using System.Windows.Threading;
 
@@ -26,13 +25,11 @@ namespace ECView.Pages.Windows
         MainWindow main;
         int index;
         int fanSetModel;
-        IFanDutyModify iFanDutyModify;
 
         public ECEditor(MainWindow main, int index, int fanduty, int fanSetModel)
         {
             InitializeComponent();
             ecBinding = (ECEditorBinding)ECEditGrid.DataContext;
-            iFanDutyModify = ModuleFactory.GetFanDutyModifyModule();
             this.main = main;
             this.index = index;
             this.fanSetModel = fanSetModel;
@@ -137,7 +134,7 @@ namespace ECView.Pages.Windows
             {
                 main.ECViewDataCollec[index].FanSet = "自动调节";
                 main.ECViewDataCollec[index].FanSetModel = 1;
-                iFanDutyModify.SetFanduty(index + 1, 0, true);
+                ECLib.FanCtrl.SetFanduty(index + 1, 0, true);
                 main.ECViewDataCollec[index].UpdateFlag = true;
 
                 //关闭窗口
@@ -148,7 +145,7 @@ namespace ECView.Pages.Windows
                 main.ECViewDataCollec[index].FanSet = "手动调节";
                 main.ECViewDataCollec[index].FanSetModel = 2;
                 main.ECViewDataCollec[index].FanDuty = ecBinding.FanDuty;
-                iFanDutyModify.SetFanduty(index + 1, (int)(ecBinding.FanDuty*2.55m), false);
+                ECLib.FanCtrl.SetFanduty(index + 1, (int)(ecBinding.FanDuty * 2.55m), false);
                 main.ECViewDataCollec[index].UpdateFlag = true;
 
                 //关闭窗口

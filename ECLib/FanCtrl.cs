@@ -21,22 +21,6 @@ namespace ECLib
         public class ConfigPara
         {
             /// <summary>
-            /// 是否自启动
-            /// </summary>
-            public bool IsAutoRun
-            {
-                get;
-                set;
-            }
-            /// <summary>
-            /// 是否最小化到托盘
-            /// </summary>
-            public bool IsBackRun
-            {
-                get;
-                set;
-            }
-            /// <summary>
             /// 调节模式号
             /// </summary>
             public int SetMode
@@ -257,21 +241,6 @@ namespace ECLib
             }
         }
         /// <summary>
-        /// 设置程序自启动
-        /// </summary>
-        /// <param name="isAutoRun">自启动标识</param>
-        public static void SetAutoRun(string filename, bool isAutoRun)
-        {
-            try
-            {
-                _setAutoRun(filename, isAutoRun);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("设置开机自启错误，原因：" + e.Message);
-            }
-        }
-        /// <summary>
         /// 启动服务
         /// </summary>
         /// <param name="serviceName">服务名称</param>
@@ -279,6 +248,16 @@ namespace ECLib
         public static bool StartService(string serviceName)
         {
             bool flag = _startService(serviceName);
+            return flag;
+        }
+        /// <summary>
+        /// 停止服务
+        /// </summary>
+        /// <param name="serviceName">服务名称</param>
+        /// <returns></returns>
+        public static bool StopService(string serviceName)
+        {
+            bool flag = _stopService(serviceName);
             return flag;
         }
         /// <summary>
@@ -493,37 +472,6 @@ namespace ECLib
 
         #region 程序框架工具函数（private）
         /// <summary>
-        /// 设置程序自启动
-        /// </summary>
-        /// <param name="fileName">程序名</param>
-        /// <param name="isAutoRun">自启动标识</param>
-        private static void _setAutoRun(string fileName, bool isAutoRun)
-        {
-            RegistryKey reg = null;
-            try
-            {
-                if (!System.IO.File.Exists(fileName))
-                    throw new Exception("该文件不存在!");
-                String name = fileName.Substring(fileName.LastIndexOf(@"\") + 1);
-                reg = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
-                if (reg == null)
-                    reg = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
-                if (isAutoRun)
-                    reg.SetValue(name, fileName);
-                else
-                    reg.SetValue(name, false);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("设置开机自启错误，原因：" + e.Message);
-            }
-            finally
-            {
-                if (reg != null)
-                    reg.Close();
-            }
-        }
-        /// <summary>
         /// 检测服务运行状态
         /// </summary>
         /// <param name="serviceName"></param>
@@ -594,6 +542,37 @@ namespace ECLib
             catch (Exception e)
             {
                 Console.WriteLine("启动服务错误，原因：" + e.Message);
+                return false;
+            }
+        }
+        /// <summary>
+        /// 停止服务
+        /// </summary>
+        /// <param name="serviceName"></param>
+        /// <returns></returns>
+        private static bool _stopService(string serviceName)
+        {
+            try
+            {
+                ServiceController service = new ServiceController(serviceName);
+                if (service.Status == ServiceControllerStatus.Stopped)
+                {
+                    //服务已停止
+                    return true;
+                }
+                else
+                {
+                    //服务未停止
+                    //设置timeout
+                    TimeSpan timeout = TimeSpan.FromMilliseconds(1000 * 10);
+                    service.Stop();//停止程序
+                    service.WaitForStatus(ServiceControllerStatus.Stopped, timeout);
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("停止服务错误，原因：" + e.Message);
                 return false;
             }
         }
@@ -687,16 +666,6 @@ namespace ECLib
             {
                 lines.Add(line);
             }
-            bool isAutoRun = false;
-            if (Convert.ToInt32(lines[3].Split(new char[] { '\t' })[1]) == 1)
-            {
-                isAutoRun = true;
-            }
-            bool isBackRun = false;
-            if (Convert.ToInt32(lines[3].Split(new char[] { '\t' })[3]) == 1)
-            {
-                isBackRun = true;
-            }
             for (int i = 5; i < lines.Count; i++)
             {
                 ConfigPara configPara = new ConfigPara();
@@ -708,8 +677,6 @@ namespace ECLib
                 configPara.SetMode = setMode;
                 configPara.FanSet = fanSet;
                 configPara.FanDuty = fanDuty;
-                configPara.IsAutoRun = isAutoRun;
-                configPara.IsBackRun = isBackRun;
                 configParaList.Add(configPara);
             }
             return configParaList;
@@ -725,7 +692,6 @@ namespace ECLib
             sw.WriteLine("#ECView");
             sw.WriteLine("#Author YcraD");
             sw.WriteLine("#Config File -- DO NOT EDIT!");
-            sw.WriteLine("IsAutoRun" + "\t" + Convert.ToInt32(configParaList[0].IsAutoRun) + "\t" + "IsBackRun" + "\t" + Convert.ToInt32(configParaList[0].IsBackRun));
             sw.WriteLine("FanCount" + "\t" + configParaList.Count);
             foreach (ConfigPara configPara in configParaList)
             {

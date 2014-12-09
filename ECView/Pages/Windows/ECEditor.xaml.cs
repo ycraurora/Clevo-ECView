@@ -62,14 +62,6 @@ namespace ECView.Pages.Windows
                 ManuChkBox.IsChecked = true;
             }
         }
-        /// <summary>
-        /// 重载关闭方法
-        /// </summary>
-        /// <returns></returns>
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-        }
         //////////////////////////////////////////////////////界面事件//////////////////////////////////////////////////////
 
         /// <summary>

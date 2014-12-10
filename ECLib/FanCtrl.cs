@@ -653,7 +653,7 @@ namespace ECLib
                 if (doc != null)
                 {
                     //释放资源
-                    ((IDisposable)doc).Dispose();
+                    doc = null;
                 }
             }
         }
@@ -700,7 +700,7 @@ namespace ECLib
                 if (sr != null)
                 {
                     //释放资源
-                    ((IDisposable)sr).Dispose();
+                    sr = null;
                 }
             }
             
@@ -734,7 +734,7 @@ namespace ECLib
                 if (sw != null)
                 {
                     //释放资源
-                    ((IDisposable)sw).Dispose();
+                    sw = null;
                 }
             }
         }

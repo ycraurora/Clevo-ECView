@@ -81,6 +81,7 @@ namespace ECView
             }
             else if (status == 1)
             {
+                ECLib.FanCtrl.StopService(serviceName);
                 return;
             }
             else if (status == 2)
@@ -166,10 +167,6 @@ namespace ECView
         }
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            if (status == 1)
-            {
-                ECLib.FanCtrl.StopService(serviceName);
-            }
             bool isUpdated = false;
             foreach (ECViewBinding ec in ecviewDataList)
             {
@@ -232,14 +229,6 @@ namespace ECView
             //加载窗体
             ECEditor ecWindow = new ECEditor(this, index, fanduty, selectFan.FanSetModel);
             ecWindow.ShowDialog();
-            ecWindow.Closing += ecWindow_Closing;
-        }
-
-        void ecWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            //更新风扇转速
-            ecviewDataList[index].FanDuty = ECLib.FanCtrl.GetTempFanDuty(index + 1)[2];
-            ecviewDataList[index].FanDutyStr = ecviewDataList[index].FanDuty + "℃";
         }
         /// <summary>
         /// 关于提示

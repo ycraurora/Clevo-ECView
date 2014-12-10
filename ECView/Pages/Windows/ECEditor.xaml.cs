@@ -137,6 +137,7 @@ namespace ECView.Pages.Windows
                 main.ECViewDataCollec[index].FanSet = "手动调节";
                 main.ECViewDataCollec[index].FanSetModel = 2;
                 main.ECViewDataCollec[index].FanDuty = ecBinding.FanDuty;
+                main.ECViewDataCollec[index].FanDutyStr = ecBinding.FanDuty + "℃";
                 ECLib.FanCtrl.SetFanduty(index + 1, (int)(ecBinding.FanDuty * 2.55m), false);
                 main.ECViewDataCollec[index].UpdateFlag = true;
 

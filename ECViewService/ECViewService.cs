@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
-using System.Threading;
 using System.Timers;
 
 namespace ECViewService
@@ -14,23 +13,20 @@ namespace ECViewService
     public partial class ECViewService : ServiceBase
     {
         //当前路径
-        private static string currentDirectory = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-        //主线程
-        private Thread mainThread;
+        private string currentDirectory = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+        //计时器
+        private Timer timer;
         /// <summary>
         /// 初始化服务
         /// </summary>
         public ECViewService()
         {
             InitializeComponent();
-            //主线程初始化
-            mainThread = new Thread(new ThreadStart(inteTimer_Elapsed));
-            mainThread.Priority = ThreadPriority.Lowest;
         }
         /// <summary>
         /// 循环处理事件
         /// </summary>
-        public static void inteTimer_Elapsed()
+        void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             //判断配置文件是否存在
             if (System.IO.File.Exists(currentDirectory + "ecview.cfg"))
@@ -43,20 +39,30 @@ namespace ECViewService
                     {
                         //若配置为自动调节，设置风扇自动调节
                         ECLib.FanCtrl.SetFanduty(configPara.FanNo, 0, true);
+                        //停止计时器
+                        timer.Enabled = false;
+                        //释放计时器资源
+                        timer.Close();
+                        timer.Dispose();
                     }
                     else if (configPara.SetMode == 2)
                     {
                         //若配置为手动调节，设置风扇转速
                         ECLib.FanCtrl.SetFanduty(configPara.FanNo, (int)(configPara.FanDuty * 2.55m), false);
+                        //停止计时器
+                        timer.Enabled = false;
+                        //释放计时器资源
+                        timer.Close();
+                        timer.Dispose();
                     }
                     else if (configPara.SetMode == 3)
                     {
                         //若配置为智能调节，设置风扇转速
                         ECLib.FanCtrl.InteFandutyControl(currentDirectory + "conf\\Configuration_" + fanNo + ".xml", fanNo);
-                        Thread.Sleep(1000);
                     }
                     else { }
                 }
+                configParaList = null;
             }
         }
         /// <summary>
@@ -65,8 +71,13 @@ namespace ECViewService
         /// <param name="args"></param>
         protected override void OnStart(string[] args)
         {
+            //计时器初始化
+            timer = new Timer(5000);
+            timer.Elapsed += timer_Elapsed;
+            //计时器循环设置
+            timer.AutoReset = true;
             //启动主线程
-            mainThread.Start();
+            timer.Enabled = true;
         }
         /// <summary>
         /// 服务关闭动作
@@ -74,7 +85,10 @@ namespace ECViewService
         protected override void OnStop()
         {
             //停止主线程
-            mainThread.Abort();
+            timer.Enabled = false;
+            //释放计时器资源
+            timer.Close();
+            timer.Dispose();
         }
     }
 }

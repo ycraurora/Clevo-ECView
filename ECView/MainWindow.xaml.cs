@@ -29,6 +29,8 @@ namespace ECView
         //ECViewService状态
         int status = 0;
         string serviceName = "ECViewService";
+        //设置行号
+        int index;
         //主窗口绑定
         ECViewBinding ecviewData = null;
         //数据列表绑定
@@ -224,12 +226,20 @@ namespace ECView
         {
             //读取选择的参数行
             var datagrid = sender as System.Windows.Controls.DataGrid;
-            int index = datagrid.SelectedIndex;
+            index = datagrid.SelectedIndex;
             ECViewBinding selectFan = (ECViewBinding)datagrid.SelectedItem;
             int fanduty = ECLib.FanCtrl.GetTempFanDuty(index + 1)[2];
             //加载窗体
             ECEditor ecWindow = new ECEditor(this, index, fanduty, selectFan.FanSetModel);
             ecWindow.ShowDialog();
+            ecWindow.Closing += ecWindow_Closing;
+        }
+
+        void ecWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //更新风扇转速
+            ecviewDataList[index].FanDuty = ECLib.FanCtrl.GetTempFanDuty(index + 1)[2];
+            ecviewDataList[index].FanDutyStr = ecviewDataList[index].FanDuty + "℃";
         }
         /// <summary>
         /// 关于提示
@@ -311,6 +321,11 @@ namespace ECView
                 while (true)
                 {
                     int[] temp = ECLib.FanCtrl.GetTempFanDuty(1);
+                    for (int i = 0; i < ecviewDataList.Count; i++)
+                    {
+                        ecviewDataList[i].FanDuty = ECLib.FanCtrl.GetTempFanDuty(i + 1)[2];
+                        ecviewDataList[i].FanDutyStr = ecviewDataList[i].FanDuty + "℃";
+                    }
                     ecviewData.CpuRemote = temp[0] + "℃";
                     Thread.Sleep(5000);
                 }

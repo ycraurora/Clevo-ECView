@@ -341,16 +341,17 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>Component</td><td>{8416C166-E3AE-459A-8FC4-82207E5E53F2}</td><td>ProgramFilesFolder</td><td>2</td><td/><td>File</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Component1</td><td>{DDA22891-23F1-45E8-BC91-978AEA45AFC8}</td><td>ProgramFilesFolder</td><td>2</td><td/><td>File1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Component1</td><td>{7BD9B9CE-FA06-4BF2-B4F2-361CFDE31843}</td><td>INSTALLDIR</td><td>2</td><td/><td>File1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Component2</td><td>{30180AEA-053E-451F-ACB5-72DDE159215F}</td><td>INSTALLDIR</td><td>2</td><td/><td>File2</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{E2364D39-3523-408F-990F-98DC3E089A13}</td><td>ProgramFilesFolder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{70EB7F6C-704F-4F71-827B-39928CFF63F6}</td><td>SystemFolder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td>{6E4A3420-1391-478B-AC8F-140C042BD4E4}</td><td>System64Folder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT3</td><td>{926B49D2-DB96-466A-A4A0-720D20C3D852}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ISX_DEFAULTCOMPONENT4</td><td>{317142BC-6B60-485D-90A3-79E63723DC23}</td><td>DIRVERS</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT4</td><td>{317142BC-6B60-485D-90A3-79E63723DC23}</td><td>DRIVERS</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT5</td><td>{1678A44F-2173-4555-BD9C-04EC382CB1C8}</td><td>DATABASEDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>NewComponent1</td><td>{13F90E3B-31F5-4514-AB3F-2FD9A3DCCFDA}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>dpmemio.dll</td><td>{39C1495D-3B66-491F-8BF1-32BE047A2E92}</td><td>ProgramFilesFolder</td><td>2</td><td/><td>dpmemio.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ecview.dll</td><td>{0D5B9AF6-26D0-46C2-99FF-2BDDBAB8C7CF}</td><td>ProgramFilesFolder</td><td>2</td><td/><td>ecview.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>dpmemio.dll1</td><td>{3D5F3C71-F061-4A5F-BC49-88C697157B7E}</td><td>INSTALLDIR</td><td>2</td><td/><td>dpmemio.dll1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ecview.dll1</td><td>{6E878F7C-E2DB-4C89-981C-23D882742FE8}</td><td>INSTALLDIR</td><td>2</td><td/><td>ecview.dll1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -1059,8 +1060,9 @@
 	<table name="CreateFolder">
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
-		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT3</td></row>
+		<row><td>DATABASEDIR</td><td>ISX_DEFAULTCOMPONENT5</td></row>
 		<row><td>INSTALLDIR</td><td>NewComponent1</td></row>
+		<row><td>ProgramFilesFolder</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>System64Folder</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>SystemFolder</td><td>ISX_DEFAULTCOMPONENT1</td></row>
 	</table>
@@ -1148,13 +1150,15 @@
 		<row><td>CommonFiles64Folder</td><td>TARGETDIR</td><td>.:Common64</td><td/><td>0</td><td/></row>
 		<row><td>CommonFilesFolder</td><td>TARGETDIR</td><td>.:Common</td><td/><td>0</td><td/></row>
 		<row><td>DATABASEDIR</td><td>ISYourDataBaseDir</td><td>.</td><td/><td>0</td><td/></row>
-		<row><td>DIRVERS</td><td>SystemFolder</td><td>dirvers</td><td/><td>0</td><td/></row>
+		<row><td>DRIVERS</td><td>SystemFolder</td><td>drivers</td><td/><td>0</td><td/></row>
 		<row><td>DesktopFolder</td><td>TARGETDIR</td><td>.:Desktop</td><td/><td>3</td><td/></row>
+		<row><td>ECVI</td><td>ProgramFilesFolder</td><td>ECVi</td><td/><td>0</td><td/></row>
+		<row><td>ECVIEW</td><td>ProgramFilesFolder</td><td>ECView</td><td/><td>0</td><td/></row>
 		<row><td>FavoritesFolder</td><td>TARGETDIR</td><td>.:FAVORI~1|Favorites</td><td/><td>0</td><td/></row>
 		<row><td>FontsFolder</td><td>TARGETDIR</td><td>.:Fonts</td><td/><td>0</td><td/></row>
 		<row><td>GlobalAssemblyCache</td><td>TARGETDIR</td><td>.:Global~1|GlobalAssemblyCache</td><td/><td>0</td><td/></row>
 		<row><td>HIT_DDS</td><td>ProgramFilesFolder</td><td>HITDDS~1|HIT DDS</td><td/><td>0</td><td/></row>
-		<row><td>INSTALLDIR</td><td>MY_PRODUCT_NAME1</td><td>.</td><td/><td>0</td><td/></row>
+		<row><td>INSTALLDIR</td><td>ECVIEW</td><td>.</td><td/><td>0</td><td/></row>
 		<row><td>ISCommonFilesFolder</td><td>CommonFilesFolder</td><td>Instal~1|InstallShield</td><td/><td>0</td><td/></row>
 		<row><td>ISMyCompanyDir</td><td>ProgramFilesFolder</td><td>MYCOMP~1|My Company Name</td><td/><td>0</td><td/></row>
 		<row><td>ISMyProductDir</td><td>ISMyCompanyDir</td><td>MYPROD~1|My Product Name</td><td/><td>0</td><td/></row>
@@ -1875,16 +1879,17 @@
 	<table name="FeatureComponents">
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
-		<row><td>AlwaysInstall</td><td>Component</td></row>
 		<row><td>AlwaysInstall</td><td>Component1</td></row>
+		<row><td>AlwaysInstall</td><td>Component2</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT1</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT3</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT4</td></row>
+		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT5</td></row>
 		<row><td>AlwaysInstall</td><td>NewComponent1</td></row>
-		<row><td>AlwaysInstall</td><td>dpmemio.dll</td></row>
-		<row><td>AlwaysInstall</td><td>ecview.dll</td></row>
+		<row><td>AlwaysInstall</td><td>dpmemio.dll1</td></row>
+		<row><td>AlwaysInstall</td><td>ecview.dll1</td></row>
 	</table>
 
 	<table name="File">
@@ -1899,12 +1904,12 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>File</td><td>Component</td><td>ECView.主输出</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ECView&gt;|Built</td><td>3</td><td/></row>
-		<row><td>File1</td><td>Component1</td><td>ECViewService.主输出</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ECViewService&gt;|Built</td><td>3</td><td/></row>
-		<row><td>dpmemio.dll</td><td>dpmemio.dll</td><td>dpmemio.dll</td><td>0</td><td/><td/><td/><td>1</td><td>E:\工具\Github\Clevo-ECView\ECView\dpmemio.dll</td><td>1</td><td/></row>
+		<row><td>File1</td><td>Component1</td><td>ECView.主输出</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ECView&gt;|Built</td><td>3</td><td/></row>
+		<row><td>File2</td><td>Component2</td><td>ECViewService.主输出</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ECViewService&gt;|Built</td><td>3</td><td/></row>
+		<row><td>dpmemio.dll1</td><td>dpmemio.dll1</td><td>dpmemio.dll</td><td>0</td><td/><td/><td/><td>1</td><td>E:\工具\Github\Clevo-ECView\ECView\dpmemio.dll</td><td>1</td><td/></row>
 		<row><td>dpmemio.sys</td><td>ISX_DEFAULTCOMPONENT4</td><td>dpmemio.sys</td><td>0</td><td/><td/><td/><td>1</td><td>E:\工具\Github\Clevo-ECView\ECView\dpmemio.sys</td><td>1</td><td/></row>
-		<row><td>ecview.dll</td><td>ecview.dll</td><td>ecview.dll</td><td>0</td><td/><td/><td/><td>1</td><td>E:\工具\Github\Clevo-ECView\ECView\ecview.dll</td><td>1</td><td/></row>
-		<row><td>ecview.ico</td><td>ISX_DEFAULTCOMPONENT</td><td>ECView.ico</td><td>0</td><td/><td/><td/><td>1</td><td>E:\工具\Github\Clevo-ECView\ECView\ECView.ico</td><td>1</td><td/></row>
+		<row><td>ecview.dll1</td><td>ecview.dll1</td><td>ecview.dll</td><td>0</td><td/><td/><td/><td>1</td><td>E:\工具\Github\Clevo-ECView\ECView\ecview.dll</td><td>1</td><td/></row>
+		<row><td>ecview.ico1</td><td>ISX_DEFAULTCOMPONENT3</td><td>ECView.ico</td><td>0</td><td/><td/><td/><td>1</td><td>E:\工具\Github\Clevo-ECView\ECView\ECView.ico</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2049,16 +2054,17 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>Component</td><td/><td/><td>_36D26EDE_57F3_4866_8627_EC9B730B9F15_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Component1</td><td/><td/><td>_51E840B6_70FE_4FF0_8B5B_2A0EC226A7B2_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Component1</td><td/><td/><td>_43D31A58_0F2B_4ED1_BE6E_03CE4E0A9C78_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Component2</td><td/><td/><td>_DF500C08_CB94_408C_9725_09189896A4F1_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_303D47A3_0689_417C_80E9_6A4447E85E2C_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_A90FC38F_D916_4D30_856D_730993FF3967_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td/><td/><td>_43375F85_37EC_413D_B7D5_B222BE61CEE8_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT3</td><td/><td/><td>_007D94CB_56EA_44ED_AD93_9FF58EB3D43C_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT4</td><td/><td/><td>_0030E65F_BBBB_49EE_B68B_9619B217A439_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISX_DEFAULTCOMPONENT5</td><td/><td/><td>_B211F9A8_2CF9_499F_AE85_9039D9923346_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>NewComponent1</td><td/><td/><td>_B3D48334_9214_453F_99C9_C7FED3D182FA_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>dpmemio.dll</td><td/><td/><td>_F61DF278_2689_4D59_86F1_54CC5D1A1F08_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>ecview.dll</td><td/><td/><td>_673E07EF_F54F_47C2_B8E5_A59B42F0113C_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>dpmemio.dll1</td><td/><td/><td>_C4B8B63C_A36E_4A03_8679_45E40C97B867_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ecview.dll1</td><td/><td/><td>_FD80E16E_A257_4105_B882_E52A4FB38E16_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2679,7 +2685,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>2052</td><td>HIT_DDS</td><td>0</td><td/><td>639771182</td></row>
+		<row><td>COMPANY_NAME</td><td>2052</td><td>HIT_DDS</td><td>0</td><td/><td>1310885623</td></row>
 		<row><td>DN_AlwaysInstall</td><td>2052</td><td>始终安装</td><td>0</td><td/><td>639807982</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>2052</td><td>系统颜色设置不足以运行 [ProductName]。</td><td>0</td><td/><td>639807982</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40CLIENT</td><td>1033</td><td>Microsoft .NET Framework 4.0 Client Package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>639767150</td></row>
@@ -3783,8 +3789,16 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>2052</td><td>对于运行 [ProductName] 处理器不足。</td><td>0</td><td/><td>639807982</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>2052</td><td>对于运行 [ProductName] 内存量不足。</td><td>0</td><td/><td>639807982</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>2052</td><td>对于运行 [ProductName] 屏幕分辨率不足。</td><td>0</td><td/><td>639807982</td></row>
-		<row><td>ID_STRING1</td><td>2052</td><td>http://www.hit.edu.cn</td><td>0</td><td/><td>639803982</td></row>
-		<row><td>ID_STRING2</td><td>2052</td><td>ycrad</td><td>0</td><td/><td>639779374</td></row>
+		<row><td>ID_STRING1</td><td>2052</td><td>http://www.HIT_DDS.com</td><td>0</td><td/><td>1310885623</td></row>
+		<row><td>ID_STRING10</td><td>1033</td><td>ECView Service</td><td>0</td><td/><td>1445118816</td></row>
+		<row><td>ID_STRING10</td><td>2052</td><td>ECView Service</td><td>0</td><td/><td>1445118816</td></row>
+		<row><td>ID_STRING11</td><td>1033</td><td>Service for ECView</td><td>0</td><td/><td>1445071744</td></row>
+		<row><td>ID_STRING11</td><td>2052</td><td>Service for ECView</td><td>0</td><td/><td>1445071744</td></row>
+		<row><td>ID_STRING12</td><td>1033</td><td>NEWSHO~1|NewShortcut2</td><td>0</td><td/><td>1445114976</td></row>
+		<row><td>ID_STRING12</td><td>2052</td><td>ECView</td><td>0</td><td/><td>1445119072</td></row>
+		<row><td>ID_STRING13</td><td>1033</td><td>NEWSHO~1|NewShortcut3</td><td>0</td><td/><td>1445127264</td></row>
+		<row><td>ID_STRING13</td><td>2052</td><td>ECView</td><td>0</td><td/><td>1445069952</td></row>
+		<row><td>ID_STRING2</td><td>2052</td><td>HIT_DDS</td><td>0</td><td/><td>1310885623</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>Installation ECView</td><td>0</td><td/><td>639810094</td></row>
 		<row><td>ID_STRING3</td><td>2052</td><td>Installation ECView</td><td>0</td><td/><td>639810094</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>NEWFOL~1|newfolder1</td><td>0</td><td/><td>639767278</td></row>
@@ -3795,6 +3809,10 @@
 		<row><td>ID_STRING6</td><td>2052</td><td>ECView</td><td>0</td><td/><td>639793902</td></row>
 		<row><td>ID_STRING7</td><td>1033</td><td>NEWSHO~1|NewShortcut3</td><td>0</td><td/><td>639814382</td></row>
 		<row><td>ID_STRING7</td><td>2052</td><td>ECView</td><td>0</td><td/><td>639818478</td></row>
+		<row><td>ID_STRING8</td><td>1033</td><td>ECViewService</td><td>0</td><td/><td>1445077152</td></row>
+		<row><td>ID_STRING8</td><td>2052</td><td>ECViewService</td><td>0</td><td/><td>1445077152</td></row>
+		<row><td>ID_STRING9</td><td>1033</td><td>Custom Service for ECView</td><td>0</td><td/><td>1445093536</td></row>
+		<row><td>ID_STRING9</td><td>2052</td><td>Custom Service for ECView</td><td>0</td><td/><td>1445093536</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>2052</td><td>系统将不安装此功能。</td><td>0</td><td/><td>639807982</td></row>
 	</table>
 
@@ -4038,7 +4056,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{77C15D7D-EB6E-4E95-9319-C16BA4AABE3F}</td></row>
 		<row><td>ISUSSignature</td><td>{67D4481B-EB29-4976-A086-C716B7D80EF7}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewUpdateService,viewShortcuts,viewUI,viewSupportFiles,viewCustomActions,viewDesignPatches,viewRelease,viewISToday</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewUpdateService,viewShortcuts,viewUI,viewSupportFiles,viewCustomActions,viewDesignPatches,viewRelease,viewISToday,viewAppFiles,viewSetupTypes,viewSetupDesign,viewServices</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4501,7 +4519,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
 		<row><td>NewShortcut1</td><td>ISX_DEFAULTCOMPONENT3</td><td/><td>newfolder1</td><td>2</td></row>
-		<row><td>NewShortcut2</td><td>Component</td><td/><td>newfolder1</td><td>2</td></row>
+		<row><td>NewShortcut2</td><td>Component1</td><td/><td>newfolder1</td><td>2</td></row>
 	</table>
 
 	<table name="RemoveIniFile">
@@ -4549,6 +4567,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">Arguments</col>
 		<col def="I2">Wait</col>
 		<col def="s72">Component_</col>
+		<row><td>NewEvent1</td><td>ECViewService</td><td>129</td><td/><td>0</td><td>Component2</td></row>
 	</table>
 
 	<table name="ServiceInstall">
@@ -4565,6 +4584,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">Arguments</col>
 		<col def="s72">Component_</col>
 		<col def="L255">Description</col>
+		<row><td>NewServiceInstall1</td><td>ECViewService</td><td>##ID_STRING10##</td><td>16</td><td>2</td><td>32769</td><td/><td/><td/><td/><td/><td>Component2</td><td>##ID_STRING11##</td></row>
 	</table>
 
 	<table name="Shortcut">
@@ -4588,8 +4608,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
 		<row><td>NewShortcut1</td><td>newfolder1</td><td>##ID_STRING5##</td><td>ISX_DEFAULTCOMPONENT3</td><td>[SystemFolder]MsiExec.exe</td><td>/x [ProductCode]</td><td/><td/><td>NewShortcut1_27A9D20C426040CBA0E22241F751009E.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>NewShortcut2</td><td>newfolder1</td><td>##ID_STRING6##</td><td>Component</td><td>AlwaysInstall</td><td/><td/><td/><td>NewShortcut2_081A80B8EE634C01B37BD651ABC73D0A.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>NewShortcut3</td><td>DesktopFolder</td><td>##ID_STRING7##</td><td>Component</td><td>AlwaysInstall</td><td/><td/><td/><td>NewShortcut3_82620DF6294F4A3997D3ED5344550913.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>NewShortcut2</td><td>newfolder1</td><td>##ID_STRING12##</td><td>Component1</td><td>AlwaysInstall</td><td/><td/><td/><td/><td/><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>NewShortcut3</td><td>DesktopFolder</td><td>##ID_STRING13##</td><td>Component1</td><td>AlwaysInstall</td><td/><td/><td/><td/><td/><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">

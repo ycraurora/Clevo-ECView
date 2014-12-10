@@ -594,6 +594,8 @@ namespace ECLib
         /// <param name="filePath"></param>
         private static IntePara _readXmlFile(string filePath, int fanNo)
         {
+            //声明XMLDocument对象
+            XmlDocument doc = new XmlDocument();
             try
             {
                 //数据存储结构体
@@ -601,8 +603,6 @@ namespace ECLib
                 inte.FanNo = fanNo;
                 //范围数据存储结构体列表
                 List<RangePara> rangeParaList = new List<RangePara>();
-                //声明XMLDocument对象
-                XmlDocument doc = new XmlDocument();
                 //加载XML文件
                 doc.Load(filePath);
                 //获取XML根结点
@@ -648,6 +648,14 @@ namespace ECLib
                 Console.WriteLine("解析XML出错，原因：" + e.Message);
                 return null;
             }
+            finally
+            {
+                if (doc != null)
+                {
+                    //释放资源
+                    ((IDisposable)doc).Dispose();
+                }
+            }
         }
         /// <summary>
         /// 读取配置文件
@@ -656,30 +664,46 @@ namespace ECLib
         /// <returns>风扇配置</returns>
         private static List<ConfigPara> _readCfgFile(string filePath)
         {
-            List<ConfigPara> configParaList = new List<ConfigPara>();
-
-            List<string> lines = new List<string>();
-
             StreamReader sr = new StreamReader(filePath);
-            string line = "";
-            while ((line = sr.ReadLine()) != null)
+            try
             {
-                lines.Add(line);
+                List<ConfigPara> configParaList = new List<ConfigPara>();
+
+                List<string> lines = new List<string>();
+
+                string line = "";
+                while ((line = sr.ReadLine()) != null)
+                {
+                    lines.Add(line);
+                }
+                for (int i = 4; i < lines.Count; i++)
+                {
+                    ConfigPara configPara = new ConfigPara();
+                    int fanNo = Convert.ToInt32(lines[i].Split(new char[] { '\t' })[1]);
+                    int setMode = Convert.ToInt32(lines[i].Split(new char[] { '\t' })[3]);
+                    string fanSet = lines[i].Split(new char[] { '\t' })[5];
+                    int fanDuty = Convert.ToInt32(lines[i].Split(new char[] { '\t' })[7]);
+                    configPara.FanNo = fanNo;
+                    configPara.SetMode = setMode;
+                    configPara.FanSet = fanSet;
+                    configPara.FanDuty = fanDuty;
+                    configParaList.Add(configPara);
+                }
+                return configParaList;
             }
-            for (int i = 5; i < lines.Count; i++)
+            catch
             {
-                ConfigPara configPara = new ConfigPara();
-                int fanNo = Convert.ToInt32(lines[i].Split(new char[] { '\t' })[1]);
-                int setMode = Convert.ToInt32(lines[i].Split(new char[] { '\t' })[3]);
-                string fanSet = lines[i].Split(new char[] { '\t' })[5];
-                int fanDuty = Convert.ToInt32(lines[i].Split(new char[] { '\t' })[7]);
-                configPara.FanNo = fanNo;
-                configPara.SetMode = setMode;
-                configPara.FanSet = fanSet;
-                configPara.FanDuty = fanDuty;
-                configParaList.Add(configPara);
+                return null;
             }
-            return configParaList;
+            finally
+            {
+                if (sr != null)
+                {
+                    //释放资源
+                    ((IDisposable)sr).Dispose();
+                }
+            }
+            
         }
         /// <summary>
         /// 写入配置文件
@@ -689,15 +713,30 @@ namespace ECLib
         private static void _writeCfgFile(string filePath, List<ConfigPara> configParaList)
         {
             StreamWriter sw = new StreamWriter(filePath);
-            sw.WriteLine("#ECView");
-            sw.WriteLine("#Author YcraD");
-            sw.WriteLine("#Config File -- DO NOT EDIT!");
-            sw.WriteLine("FanCount" + "\t" + configParaList.Count);
-            foreach (ConfigPara configPara in configParaList)
+            try
             {
-                sw.WriteLine("FanNo" + "\t" + configPara.FanNo + "\t" + "SetMode" + "\t" + configPara.SetMode + "\t" + "FanSet" + "\t" + configPara.FanSet + "\t" + "FanDuty" + "\t" + configPara.FanDuty);
+                sw.WriteLine("#ECView");
+                sw.WriteLine("#Author YcraD");
+                sw.WriteLine("#Config File -- DO NOT EDIT!");
+                sw.WriteLine("FanCount" + "\t" + configParaList.Count);
+                foreach (ConfigPara configPara in configParaList)
+                {
+                    sw.WriteLine("FanNo" + "\t" + configPara.FanNo + "\t" + "SetMode" + "\t" + configPara.SetMode + "\t" + "FanSet" + "\t" + configPara.FanSet + "\t" + "FanDuty" + "\t" + configPara.FanDuty);
+                }
+                sw.Close();
             }
-            sw.Close();
+            catch
+            {
+                return;
+            }
+            finally
+            {
+                if (sw != null)
+                {
+                    //释放资源
+                    ((IDisposable)sw).Dispose();
+                }
+            }
         }
         #endregion
     }

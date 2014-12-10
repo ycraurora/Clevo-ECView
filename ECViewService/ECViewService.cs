@@ -6,38 +6,36 @@ using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
+using System.Threading;
 using System.Timers;
 
 namespace ECViewService
 {
     public partial class ECViewService : ServiceBase
     {
-        //初始化计时器（1000ms）
-        private Timer inteTimer = new Timer(1000);
         //当前路径
-        private string currentDirectory = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+        private static string currentDirectory = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+        //主线程
+        private Thread mainThread;
         /// <summary>
         /// 初始化服务
         /// </summary>
         public ECViewService()
         {
             InitializeComponent();
-            //计时器处理Elapsed事件
-            inteTimer.Elapsed += inteTimer_Elapsed;
-            //指定每次间隔结束引发Elapsed事件
-            inteTimer.AutoReset = true;
+            //主线程初始化
+            mainThread = new Thread(new ThreadStart(inteTimer_Elapsed));
+            mainThread.Priority = ThreadPriority.Lowest;
         }
         /// <summary>
-        /// 计时器处理事件
+        /// 循环处理事件
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void inteTimer_Elapsed(object sender, ElapsedEventArgs e)
+        public static void inteTimer_Elapsed()
         {
             //判断配置文件是否存在
             if (System.IO.File.Exists(currentDirectory + "ecview.cfg"))
             {
-                List<ECLib.FanCtrl.ConfigPara> configParaList = ECLib.FanCtrl.ReadCfgFile(currentDirectory + "ecview.cfg");
+                List<ECLib.FanCtrl.ConfigPara> configParaList = configParaList = ECLib.FanCtrl.ReadCfgFile(currentDirectory + "ecview.cfg");
                 foreach (ECLib.FanCtrl.ConfigPara configPara in configParaList)
                 {
                     int fanNo = configPara.FanNo;
@@ -54,7 +52,8 @@ namespace ECViewService
                     else if (configPara.SetMode == 3)
                     {
                         //若配置为智能调节，设置风扇转速
-                        bool state = ECLib.FanCtrl.InteFandutyControl(currentDirectory + "conf\\Configuration_" + fanNo + ".xml", fanNo);
+                        ECLib.FanCtrl.InteFandutyControl(currentDirectory + "conf\\Configuration_" + fanNo + ".xml", fanNo);
+                        Thread.Sleep(1000);
                     }
                     else { }
                 }
@@ -66,16 +65,16 @@ namespace ECViewService
         /// <param name="args"></param>
         protected override void OnStart(string[] args)
         {
-            //引发Elapsed事件
-            inteTimer.Enabled = true;
+            //启动主线程
+            mainThread.Start();
         }
         /// <summary>
         /// 服务关闭动作
         /// </summary>
         protected override void OnStop()
         {
-            //停止Elapsed事件
-            inteTimer.Enabled = false;
+            //停止主线程
+            mainThread.Abort();
         }
     }
 }

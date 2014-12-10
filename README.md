@@ -9,6 +9,18 @@ Visual Studio 2013<br />
 Visual C# WPF &amp; <del>Setup Project</del> InstallShield LE Setup Project<br />
 <br />
 NOTICE: This project is in Chinese(Simplified)<br />
+==================================================================<br />
+<br />
+Release NOTE:<br />
+2014.12.10 Wed.<br />
+<br />
+1.Update project to VS2013<br />
+2.Rewrite methods in DLL<br />
+3.Rewrite loop in Windows Service<br />
+4.Remove autorun &amp; backrun and use Windows Service instead<br />
+5.Now you can add &amp; remove fans(support multifans' control)<br />
+6.Other features see the history release(s)<br />
+==================================================================<br />
 <br />
 Update NOTE(WIP):<br />
 2014.12.04 Tur.<br />

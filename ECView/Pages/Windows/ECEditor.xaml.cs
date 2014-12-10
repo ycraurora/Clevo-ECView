@@ -155,6 +155,7 @@ namespace ECView.Pages.Windows
                 else
                 {
                     main.ECViewDataCollec[index].UpdateFlag = true;
+                    MessageBox.Show("智能调节将在程序关闭后启用", "提示信息", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     //关闭窗口
                     this.Close();

@@ -1,7 +1,9 @@
 <ECView Type="1">
-	<fan MinFanduty="55">
-		<range Num="1" Fanduty="50" InferiorLimit="45"></range>
-		<range Num="2" Fanduty="75" InferiorLimit="50"></range>
-		<range Num="3" Fanduty="80" InferiorLimit="60"></range>
+	<fan MinFanduty="40">
+		<range Num="1" Fanduty="50" InferiorLimit="40"></range>
+		<range Num="2" Fanduty="60" InferiorLimit="45"></range>
+		<range Num="3" Fanduty="70" InferiorLimit="60"></range>
+		<range Num="3" Fanduty="80" InferiorLimit="70"></range>
+		<range Num="3" Fanduty="100" InferiorLimit="80"></range>
 	</fan>
 </ECView>

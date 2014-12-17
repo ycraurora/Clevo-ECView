@@ -313,7 +313,7 @@ namespace ECView
                     for (int i = 0; i < ecviewDataList.Count; i++)
                     {
                         ecviewDataList[i].FanDuty = ECLib.FanCtrl.GetTempFanDuty(i + 1)[2];
-                        ecviewDataList[i].FanDutyStr = ecviewDataList[i].FanDuty + "℃";
+                        ecviewDataList[i].FanDutyStr = ecviewDataList[i].FanDuty + "%";
                     }
                     ecviewData.CpuRemote = temp[0] + "℃";
                     Thread.Sleep(5000);

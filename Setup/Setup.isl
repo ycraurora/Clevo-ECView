@@ -2685,11 +2685,11 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>2052</td><td>HIT_DDS</td><td>0</td><td/><td>1310885623</td></row>
+		<row><td>COMPANY_NAME</td><td>2052</td><td>HIT_DDS</td><td>0</td><td/><td>1512291444</td></row>
 		<row><td>DN_AlwaysInstall</td><td>2052</td><td>始终安装</td><td>0</td><td/><td>639807982</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>2052</td><td>系统颜色设置不足以运行 [ProductName]。</td><td>0</td><td/><td>639807982</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40CLIENT</td><td>1033</td><td>Microsoft .NET Framework 4.0 Client Package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>639767150</td></row>
-		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40CLIENT</td><td>2052</td><td>Microsoft .NET Framework 4.0 Client Package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>639797870</td></row>
+		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40CLIENT</td><td>2052</td><td>Microsoft .NET Framework 4.0 Client Package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>1512281236</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>639781486</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>2052</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>639781486</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_OS</td><td>2052</td><td>操作系统不足以运行 [ProductName]。</td><td>0</td><td/><td>639807982</td></row>
@@ -3789,7 +3789,7 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>2052</td><td>对于运行 [ProductName] 处理器不足。</td><td>0</td><td/><td>639807982</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>2052</td><td>对于运行 [ProductName] 内存量不足。</td><td>0</td><td/><td>639807982</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>2052</td><td>对于运行 [ProductName] 屏幕分辨率不足。</td><td>0</td><td/><td>639807982</td></row>
-		<row><td>ID_STRING1</td><td>2052</td><td>http://www.HIT_DDS.com</td><td>0</td><td/><td>1310885623</td></row>
+		<row><td>ID_STRING1</td><td>2052</td><td>http://www.HIT_DDS.com</td><td>0</td><td/><td>1512291444</td></row>
 		<row><td>ID_STRING10</td><td>1033</td><td>ECView Service</td><td>0</td><td/><td>1445118816</td></row>
 		<row><td>ID_STRING10</td><td>2052</td><td>ECView Service</td><td>0</td><td/><td>1445118816</td></row>
 		<row><td>ID_STRING11</td><td>1033</td><td>Service for ECView</td><td>0</td><td/><td>1445071744</td></row>
@@ -3798,7 +3798,7 @@
 		<row><td>ID_STRING12</td><td>2052</td><td>ECView</td><td>0</td><td/><td>1445119072</td></row>
 		<row><td>ID_STRING13</td><td>1033</td><td>NEWSHO~1|NewShortcut3</td><td>0</td><td/><td>1445127264</td></row>
 		<row><td>ID_STRING13</td><td>2052</td><td>ECView</td><td>0</td><td/><td>1445069952</td></row>
-		<row><td>ID_STRING2</td><td>2052</td><td>HIT_DDS</td><td>0</td><td/><td>1310885623</td></row>
+		<row><td>ID_STRING2</td><td>2052</td><td>HIT_DDS</td><td>0</td><td/><td>1512291444</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>Installation ECView</td><td>0</td><td/><td>639810094</td></row>
 		<row><td>ID_STRING3</td><td>2052</td><td>Installation ECView</td><td>0</td><td/><td>639810094</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>NEWFOL~1|newfolder1</td><td>0</td><td/><td>639767278</td></row>
@@ -4056,7 +4056,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{77C15D7D-EB6E-4E95-9319-C16BA4AABE3F}</td></row>
 		<row><td>ISUSSignature</td><td>{67D4481B-EB29-4976-A086-C716B7D80EF7}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewUpdateService,viewShortcuts,viewUI,viewSupportFiles,viewCustomActions,viewDesignPatches,viewRelease,viewISToday,viewAppFiles,viewSetupTypes,viewSetupDesign,viewServices,viewAppV</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewUpdateService,viewShortcuts,viewUI,viewSupportFiles,viewCustomActions,viewDesignPatches,viewRelease,viewISToday,viewAppFiles,viewSetupTypes,viewSetupDesign,viewServices,viewAppV,viewRealSetupDesign,viewEnvironmentVariables,viewVRoots,viewSystemSearch</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4114,7 +4114,6 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 	<table name="LaunchCondition">
 		<col key="yes" def="s255">Condition</col>
 		<col def="l255">Description</col>
-		<row><td>(Not Version9X) And (Not VersionNT=400) And (Not VersionNT=500) And (Not VersionNT=501) And (Not VersionNT=502) And (Not VersionNT=600) And (Not (VersionNT=601 And Not (MsiNTProductType=1))) And (Not VersionNT=602) And (Not VersionNT=603)</td><td>##IDPROP_EXPRESS_LAUNCH_CONDITION_OS##</td></row>
 		<row><td>DOTNETVERSION40CLIENT&gt;="#1"</td><td>##IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40CLIENT##</td></row>
 		<row><td>DOTNETVERSION45FULL&gt;="#1"</td><td>##IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL##</td></row>
 	</table>

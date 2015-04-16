@@ -189,13 +189,18 @@ namespace ECLib
         {
             try
             {
-                var ecData = _getTempFanDuty(fanNo);
+                /*var ecData = _getTempFanDuty(fanNo);
                 int byteData = ecData.data;
                 byte[] ec = BitConverter.GetBytes(byteData);
                 int[] fanduty = { 0, 0, 0 };
                 fanduty[0] = (int)ec[0];
                 fanduty[1] = (int)ec[1];
-                fanduty[2] = (int)Math.Round(ec[2] / 2.55m);
+                fanduty[2] = (int)Math.Round(ec[2] / 2.55m);*/
+                ECData ecData = _getTempFanDuty(fanNo);
+                int[] fanduty = { 0, 0, 0 };
+                fanduty[0] = (int)ecData.data;
+                fanduty[1] = (int)ecData.data1;
+                fanduty[2] = (int)Math.Round(ecData.data2 / 2.55m);
                 return fanduty;
             }
             catch (Exception e)
@@ -464,9 +469,9 @@ namespace ECLib
 
         private struct ECData
         {
-            public int data;
-            public int data1;
-            public int data2;
+            public byte data;
+            public byte data1;
+            public byte data2;
         }
         #endregion
 

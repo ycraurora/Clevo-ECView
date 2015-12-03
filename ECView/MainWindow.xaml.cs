@@ -2,22 +2,10 @@
 using ECView.Pages.Windows;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Management;
-using System.Reflection;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace ECView
 {
@@ -63,7 +51,7 @@ namespace ECView
             ecviewData = (ECViewBinding)ECViewGrid.DataContext;
             ecviewDataList = (ECViewCollec)ECDataGrid.DataContext;
             //当前工作目录
-            currentDirectory = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            currentDirectory = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
             //初始化数据
             InitECData();
             //CPU更新线程

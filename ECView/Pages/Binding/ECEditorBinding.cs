@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ECView.Pages.Binding
+﻿namespace ECView.Pages.Binding
 {
     public class ECEditorBinding : PropertyChangeBase
     {

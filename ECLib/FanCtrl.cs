@@ -1,13 +1,9 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace ECLib
@@ -198,9 +194,9 @@ namespace ECLib
                 fanduty[2] = (int)Math.Round(ec[2] / 2.55m);*/
                 ECData ecData = _getTempFanDuty(fanNo);
                 int[] fanduty = { 0, 0, 0 };
-                fanduty[0] = (int)ecData.data;
-                fanduty[1] = (int)ecData.data1;
-                fanduty[2] = (int)Math.Round(ecData.data2 / 2.55m);
+                fanduty[0] = ecData.Remote;
+                fanduty[1] = ecData.Local;
+                fanduty[2] = (int)Math.Round(ecData.FanDuty / 2.55m);
                 return fanduty;
             }
             catch (Exception e)
@@ -467,11 +463,11 @@ namespace ECLib
         [DllImport("ecview.dll", EntryPoint = "#8")]
         private static extern string _getECVersion();
 
-        private struct ECData
+        public struct ECData
         {
-            public byte data;
-            public byte data1;
-            public byte data2;
+            public byte Remote;
+            public byte Local;
+            public byte FanDuty;
         }
         #endregion
 

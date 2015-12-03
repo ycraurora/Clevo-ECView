@@ -13,7 +13,7 @@ namespace ECViewService
     public partial class ECViewService : ServiceBase
     {
         //当前路径
-        private string currentDirectory = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+        private string currentDirectory = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
         //线程
         private Thread t = null;
         List<ECLib.FanCtrl.ConfigPara> configParaList = null;

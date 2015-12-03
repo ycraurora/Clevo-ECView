@@ -183,12 +183,12 @@ namespace ECView.Pages.Windows
                     //风扇号
                     int fanNo = index + 1;
                     //目标文件绝对路径
-                    string targetPath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "conf\\Configuration_" + fanNo + ".xml";
+                    string targetPath = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "conf\\Configuration_" + fanNo + ".xml";
                     //检测目标文件夹是否存在
-                    if (!Directory.Exists(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "conf\\"))
+                    if (!Directory.Exists(AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "conf\\"))
                     {
                         //若不存在则建立文件夹
-                        Directory.CreateDirectory(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "conf\\");
+                        Directory.CreateDirectory(AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "conf\\");
                     }
                     //复制配置文件（覆盖同名文件）
                     File.Copy(fileDialog.FileName, targetPath, true);

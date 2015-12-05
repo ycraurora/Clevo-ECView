@@ -21,7 +21,7 @@
                 <MenuItem.Header>
                     <TextBlock Text="帮助" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="14"></TextBlock>
                 </MenuItem.Header>
-                <MenuItem Click="Aboout_Click">
+                <MenuItem Click="About_Click">
                     <MenuItem.Header>
                         <TextBlock Text="关于" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Center" FontSize="14"></TextBlock>
                     </MenuItem.Header>
@@ -49,9 +49,9 @@
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="1" Content="CPU温度：" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
-                <Label Grid.Column="2" Content="{Binding Path=CpuRemote}" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
-                <Button Grid.Column="3" Name="addBtn" Content="添加风扇" FontSize="14" Height="25" Width="60" HorizontalAlignment="Right" Click="addBtn_Click"></Button>
-                <Button Grid.Column="4" Name="rmvBtn" Content="移除风扇" FontSize="14" Height="25" Width="60" Click="rmvBtn_Click"></Button>
+                <Label Grid.Column="2" Content="{Binding Path=CpuRemote}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Label Grid.Column="3" Content="显卡温度：" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <Label Grid.Column="4" Content="{Binding Path=CpuLocal}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
             </Grid>
             <DataGrid Name="ECDataGrid" Grid.Row="3" Grid.RowSpan="3" FontSize="14" AutoGenerateColumns="False" ItemsSource="{Binding}" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Hyperlink.Click="ECEditor_Click">
                 <DataGrid.Resources>

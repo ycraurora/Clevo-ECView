@@ -9,15 +9,15 @@ namespace ECViewService
     static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// 应用程序的主入口点。
         /// </summary>
         static void Main()
         {
             ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[] 
-			{ 
-				new ECViewService() 
-			};
+            ServicesToRun = new ServiceBase[]
+            {
+                new ECViewService()
+            };
             ServiceBase.Run(ServicesToRun);
         }
     }

@@ -27,7 +27,7 @@
 			<TargetPath>My Test Exe.exe</TargetPath>
 		</TaggedOutputs> -->
 	</ItemGroup>
-	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2013Limited\InstallShield.targets"/>
+	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2015Limited\InstallShield.targets"/>
 	<ItemGroup>
 		<ProjectReference Include="..\ECView\ECView.csproj">
 			<Name>ECView</Name>
@@ -35,7 +35,7 @@
 		</ProjectReference>
 		<ProjectReference Include="..\ECViewService\ECViewService.csproj">
 			<Name>ECViewService</Name>
-			<Project>{B396BA6D-C8A4-49CB-AF6D-E5E769DC4093}</Project>
+			<Project>{B0300D4F-247D-4CEA-ADBC-F0D0809C8764}</Project>
 		</ProjectReference>
 	</ItemGroup>
 </Project>

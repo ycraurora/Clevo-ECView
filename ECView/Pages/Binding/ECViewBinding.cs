@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace ECView.Pages.Binding
 {
@@ -101,6 +97,22 @@ namespace ECView.Pages.Binding
         }
         /// <summary>
         /// CPU温度
+        /// </summary>
+        private string _cpuLocal;
+        public string CpuLocal
+        {
+            set
+            {
+                _cpuLocal = value;
+                Notify("CpuLocal");
+            }
+            get
+            {
+                return _cpuLocal;
+            }
+        }
+        /// <summary>
+        /// 主板温度
         /// </summary>
         private string _cpuRemote;
         public string CpuRemote

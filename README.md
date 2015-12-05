@@ -4,11 +4,18 @@ Clevo-ECView
 Clevo ECviewer and FanDuty Controller<br />
 <br />
 <del>Visual Studio 2010</del><br />
-Visual Studio 2013<br />
+<del>Visual Studio 2013</del><br />
+Visual Studio 2015<br />
 <br />
 Visual C# WPF &amp; <del>Setup Project</del> InstallShield LE Setup Project<br />
 <br />
 NOTICE: This project is in Chinese(Simplified)<br />
+==================================================================<br />
+<br />
+Update NOTE:<br />
+2015.12.05 Sat.<br />
+<br />
+1.Adaptation for windows 10<br />
 ==================================================================<br />
 <br />
 Release NOTE:<br />

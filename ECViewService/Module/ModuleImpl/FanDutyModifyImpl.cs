@@ -197,17 +197,17 @@ namespace ECView.Module.ModuleImpl
                         //若小于最小温度，设置风扇转速为最小值
                         if (ecData[0] < intePara.RangeParaList[i].InferiorLimit)
                         {
-                            SetFanduty(intePara.FanNo, (int)(intePara.MinFanDuty * 2.55m), false);
+                            SetFanduty(intePara.FanNo, (int)((intePara.MinFanDuty > 100 ? 100 : intePara.MinFanDuty) * 2.55m), false);
                         }
                         else if (ecData[0] >= intePara.RangeParaList[i].InferiorLimit && ecData[0] < intePara.RangeParaList[i + 1].InferiorLimit)
                         {
                             if (intePara.RangeParaList[i].FanDuty < intePara.MinFanDuty)
                             {
-                                SetFanduty(intePara.FanNo, (int)(intePara.MinFanDuty * 2.55m), false);
+                                SetFanduty(intePara.FanNo, (int)((intePara.MinFanDuty > 100 ? 100 : intePara.MinFanDuty) * 2.55m), false);
                             }
                             else
                             {
-                                SetFanduty(intePara.FanNo, (int)(intePara.RangeParaList[i].FanDuty * 2.55m), false);
+                                SetFanduty(intePara.FanNo, (int)((intePara.RangeParaList[i].FanDuty > 100 ? 100 : intePara.RangeParaList[i].FanDuty) * 2.55m), false);
                             }
                         }
                         else
@@ -221,11 +221,11 @@ namespace ECView.Module.ModuleImpl
                         {
                             if (intePara.RangeParaList[i].FanDuty < intePara.MinFanDuty)
                             {
-                                SetFanduty(intePara.FanNo, (int)(intePara.MinFanDuty * 2.55m), false);
+                                SetFanduty(intePara.FanNo, (int)((intePara.MinFanDuty > 100 ? 100 : intePara.MinFanDuty) * 2.55m), false);
                             }
                             else
                             {
-                                SetFanduty(intePara.FanNo, (int)(intePara.RangeParaList[i].FanDuty * 2.55m), false);
+                                SetFanduty(intePara.FanNo, (int)((intePara.RangeParaList[i].FanDuty > 100 ? 100 : intePara.RangeParaList[i].FanDuty) * 2.55m), false);
                             }
                         }
                         else
@@ -239,11 +239,11 @@ namespace ECView.Module.ModuleImpl
                         {
                             if (intePara.RangeParaList[i].FanDuty < intePara.MinFanDuty)
                             {
-                                SetFanduty(intePara.FanNo, (int)(intePara.MinFanDuty * 2.55m), false);
+                                SetFanduty(intePara.FanNo, (int)((intePara.MinFanDuty > 100 ? 100 : intePara.MinFanDuty) * 2.55m), false);
                             }
                             else
                             {
-                                SetFanduty(intePara.FanNo, (int)(intePara.RangeParaList[i].FanDuty * 2.55m), false);
+                                SetFanduty(intePara.FanNo, (int)((intePara.RangeParaList[i].FanDuty > 100 ? 100 : intePara.RangeParaList[i].FanDuty) * 2.55m), false);
                             }
                         }
                     }
@@ -258,17 +258,17 @@ namespace ECView.Module.ModuleImpl
                         //若小于最小温度，设置风扇转速为最小值
                         if (ecData[0] < intePara.RangeParaList[i].InferiorLimit)
                         {
-                            SetFanduty(intePara.FanNo, (int)(intePara.MinFanDuty * 2.55m), false);
+                            SetFanduty(intePara.FanNo, (int)((intePara.MinFanDuty > 100 ? 100 : intePara.MinFanDuty) * 2.55m), false);
                         }
                         else if (ecData[0] > intePara.RangeParaList[i].InferiorLimit && ecData[0] < intePara.RangeParaList[i + 1].InferiorLimit)
                         {
                             if ((intePara.RangeParaList[i].AddPercentage + ecData[0]) < intePara.MinFanDuty)
                             {
-                                SetFanduty(intePara.FanNo, (int)(intePara.MinFanDuty * 2.55m), false);
+                                SetFanduty(intePara.FanNo, (int)((intePara.MinFanDuty > 100 ? 100 : intePara.MinFanDuty) * 2.55m), false);
                             }
                             else
                             {
-                                SetFanduty(intePara.FanNo, (int)((intePara.RangeParaList[i].AddPercentage + ecData[0]) * 2.55m), false);
+                                SetFanduty(intePara.FanNo, (int)(((intePara.RangeParaList[i].AddPercentage + ecData[0]) > 100 ? 100 : (intePara.RangeParaList[i].AddPercentage + ecData[0])) * 2.55m), false);
                             }
                         }
                         else
@@ -282,11 +282,11 @@ namespace ECView.Module.ModuleImpl
                         {
                             if ((intePara.RangeParaList[i].AddPercentage + ecData[0]) < intePara.MinFanDuty)
                             {
-                                SetFanduty(intePara.FanNo, (int)(intePara.MinFanDuty * 2.55m), false);
+                                SetFanduty(intePara.FanNo, (int)((intePara.MinFanDuty > 100 ? 100 : intePara.MinFanDuty) * 2.55m), false);
                             }
                             else
                             {
-                                SetFanduty(intePara.FanNo, (int)((intePara.RangeParaList[i].AddPercentage + ecData[0]) * 2.55m), false);
+                                SetFanduty(intePara.FanNo, (int)(((intePara.RangeParaList[i].AddPercentage + ecData[0]) > 100 ? 100 : (intePara.RangeParaList[i].AddPercentage + ecData[0])) * 2.55m), false);
                             }
                         }
                         else
@@ -300,11 +300,11 @@ namespace ECView.Module.ModuleImpl
                         {
                             if ((intePara.RangeParaList[i].AddPercentage + ecData[0]) < intePara.MinFanDuty)
                             {
-                                SetFanduty(intePara.FanNo, (int)(intePara.MinFanDuty * 2.55m), false);
+                                SetFanduty(intePara.FanNo, (int)((intePara.MinFanDuty > 100 ? 100 : intePara.MinFanDuty) * 2.55m), false);
                             }
                             else
                             {
-                                SetFanduty(intePara.FanNo, (int)((intePara.RangeParaList[i].AddPercentage + ecData[0]) * 2.55m), false);
+                                SetFanduty(intePara.FanNo, (int)(((intePara.RangeParaList[i].AddPercentage + ecData[0]) > 100 ? 100 : (intePara.RangeParaList[i].AddPercentage + ecData[0])) * 2.55m), false);
                             }
                         }
                     }

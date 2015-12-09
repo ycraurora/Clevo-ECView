@@ -12,7 +12,7 @@ namespace ECView
     /// </summary>
     public partial class App : Application
     {
-        /*public App()
+        public App()
         {
             //禁用重复开启
             bool createNew = false;
@@ -32,6 +32,6 @@ namespace ECView
                     System.Environment.Exit(1);
                 }
             }
-        }*/
+        }
     }
 }

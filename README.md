@@ -13,6 +13,12 @@ NOTICE: This project is in Chinese(Simplified)<br />
 ==================================================================<br />
 <br />
 Update NOTE:<br />
+2015.12.09 Tue.<br />
+<br />
+1.Set click once only<br />
+==================================================================<br />
+<br />
+Update NOTE:<br />
 2015.12.05 Sat.<br />
 <br />
 1.Adaptation for windows 10<br />

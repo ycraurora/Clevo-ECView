@@ -67,7 +67,7 @@ namespace ECViewService
         /// <param name="args"></param>
         protected override void OnStart(string[] args)
         {
-            configParaList = configParaList = iFanDutyModify.ReadCfgFile(currentDirectory + "ecview.cfg");
+            configParaList = iFanDutyModify.ReadCfgFile(currentDirectory + "ecview.cfg");
             t = new Thread(new ThreadStart(setFandutyThread));
             //设置线程优先级最低
             t.Priority = ThreadPriority.Lowest;

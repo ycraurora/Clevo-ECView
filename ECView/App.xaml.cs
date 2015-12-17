@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
+﻿using System.Diagnostics;
+using System.Threading;
 using System.Windows;
 
 namespace ECView
@@ -12,10 +9,11 @@ namespace ECView
     /// </summary>
     public partial class App : Application
     {
+        Mutex mut;
         public App()
         {
             //禁用重复开启
-            bool createNew = false;
+            /*bool createNew = false;
             string targetExeName = System.Reflection.Assembly.GetExecutingAssembly().Location;
             string productName = System.IO.Path.GetFileName(System.Reflection.Assembly.GetEntryAssembly().GetName().Name);
 
@@ -23,14 +21,25 @@ namespace ECView
             {
                 if (createNew)
                 {
-                    StartupUri = new System.Uri("MainWindow.xaml", UriKind.Relative);
+                    StartupUri = new Uri("MainWindow.xaml", UriKind.Relative);
                     Run();
                 }
                 else
                 {
                     //PTMCWin32API.SendMessage(targetExeName, "Protocol Testing Management Console", "/v:true");
-                    System.Environment.Exit(1);
+                    Environment.Exit(1);
                 }
+            }*/
+            bool requestInitialOwnership = true;
+            bool mutexWasCreated;
+            mut = new Mutex(requestInitialOwnership, "com.Application1.Ding", out mutexWasCreated);
+            if (!(requestInitialOwnership && mutexWasCreated))
+            {
+                // 随意什么操作啦~
+                //Current.Shutdown();
+                //当前运行WPF程序的进程实例
+                Process process = Process.GetCurrentProcess();
+                process.Kill();
             }
         }
     }

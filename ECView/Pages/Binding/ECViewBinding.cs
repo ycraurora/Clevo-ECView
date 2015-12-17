@@ -175,21 +175,5 @@ namespace ECView.Pages.Binding
                 return _updateFlag;
             }
         }
-        /// <summary>
-        /// 操作
-        /// </summary>
-        private string _ope;
-        public string Ope
-        {
-            set
-            {
-                _ope = value;
-                Notify("Ope");
-            }
-            get
-            {
-                return _ope;
-            }
-        }
     }
 }

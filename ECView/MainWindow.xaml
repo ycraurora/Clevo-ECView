@@ -2,43 +2,78 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:data="clr-namespace:ECView.Pages.Binding"
-        Title="Clevo ECView" Height="350" Width="500" WindowStyle="ToolWindow">
+        Title="Clevo ECView" Height="350" Width="500" ResizeMode="CanMinimize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style x:Key="MetroBigTextBlock" TargetType="TextBlock">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+            <Style x:Key="MetroMidTextBlock" TargetType="TextBlock">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Margin" Value="50,0,0,0"/>
+            </Style>
+            <Style x:Key="MetroLabel" TargetType="Label">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="16"/>
+            </Style>
+            <Style x:Key="MetroDataGrid" TargetType="DataGrid">
+                <Setter Property="IsReadOnly" Value="True"/>
+                <Setter Property="AutoGenerateColumns" Value="False"/>
+                <Setter Property="CanUserReorderColumns" Value="False"/>
+                <Setter Property="CanUserSortColumns" Value="False"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalGridLinesBrush" Value="LightBlue"/>
+                <Setter Property="HorizontalGridLinesBrush" Value="LightBlue"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="RowHeaderWidth" Value="0"/>
+                <Setter Property="Background" Value="White"/>
+            </Style>
+            <Style x:Key="MetroDataGridText" TargetType="TextBlock">
+                <Setter Property="TextAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="MetroDataGridHeader" TargetType="DataGridColumnHeader">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="BorderBrush" Value="LightBlue"/>
+                <Setter Property="BorderThickness" Value="0,0,1,1"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid Name="ECViewGrid">
         <Grid.Resources>
-            <data:ECViewBinding x:Key="ecViewDataBind"></data:ECViewBinding>
+            <data:ECViewBinding x:Key="ecViewDataBind"/>
         </Grid.Resources>
         <Grid.DataContext>
-            <Binding Source="{StaticResource ecViewDataBind}"></Binding>
+            <Binding Source="{StaticResource ecViewDataBind}"/>
         </Grid.DataContext>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="1"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Menu>
-            <MenuItem Height="25">
-                <MenuItem.Header>
-                    <TextBlock Text="帮助" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="14"></TextBlock>
-                </MenuItem.Header>
-                <MenuItem Click="About_Click">
-                    <MenuItem.Header>
-                        <TextBlock Text="关于" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Center" FontSize="14"></TextBlock>
-                    </MenuItem.Header>
-                </MenuItem>
-            </MenuItem>
+        <Menu Background="White" VerticalAlignment="Center" BorderThickness="0">
+            <MenuItem Click="About_Click" Header="关于" FontSize="14"/>
         </Menu>
-        <TextBlock Grid.Row="1" Text="Clevo ECView（风扇转速控制软件）" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Grid.Row="1" Text="Clevo ECView（风扇转速控制软件）" Style="{StaticResource MetroBigTextBlock}"></TextBlock>
         <Rectangle Grid.Row="2" Fill="#aaa" VerticalAlignment="Top" Height="1" Margin="20,0,20,0"/>
         <Grid Grid.Row="3">
             <Grid.RowDefinitions>
-                <RowDefinition Height="35"></RowDefinition>
-                <RowDefinition Height="35"></RowDefinition>
-                <RowDefinition Height="35"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="{Binding Path=NbModel}" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0"></TextBlock>
-            <TextBlock Grid.Row="1" Text="{Binding Path=ECVersion}" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0"></TextBlock>
+            <TextBlock Grid.Row="0" Text="{Binding Path=NbModel}" Style="{StaticResource MetroMidTextBlock}"/>
+            <TextBlock Grid.Row="1" Text="{Binding Path=ECVersion}" Style="{StaticResource MetroMidTextBlock}"/>
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
@@ -48,39 +83,34 @@
                     <ColumnDefinition Width="0.5*"></ColumnDefinition>
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="1" Content="CPU温度：" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
-                <Label Grid.Column="2" Content="{Binding Path=CpuRemote}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-                <Label Grid.Column="3" Content="显卡温度：" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
-                <Label Grid.Column="4" Content="{Binding Path=CpuLocal}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Label Grid.Column="1" Content="CPU温度：" Style="{StaticResource MetroLabel}" HorizontalAlignment="Right"/>
+                <Label Grid.Column="2" Content="{Binding Path=CpuRemote}" Style="{StaticResource MetroLabel}"/>
+                <Label Grid.Column="3" Content="显卡温度：" Style="{StaticResource MetroLabel}" HorizontalAlignment="Right"/>
+                <Label Grid.Column="4" Content="{Binding Path=CpuLocal}" Style="{StaticResource MetroLabel}"/>
             </Grid>
-            <DataGrid Name="ECDataGrid" Grid.Row="3" Grid.RowSpan="3" FontSize="14" AutoGenerateColumns="False" ItemsSource="{Binding}" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Hyperlink.Click="ECEditor_Click">
+            <DataGrid Name="ECDataGrid" Grid.Row="3" Grid.RowSpan="3" Style="{StaticResource MetroDataGrid}" ItemsSource="{Binding}" MouseDoubleClick="ECDataGrid_MouseDoubleClick">
                 <DataGrid.Resources>
-                    <data:ECViewCollec x:Key="ecviewDataListBind"></data:ECViewCollec>
+                    <data:ECViewCollec x:Key="ecviewDataListBind"/>
                 </DataGrid.Resources>
                 <DataGrid.DataContext>
-                    <Binding Source="{StaticResource ecviewDataListBind}"></Binding>
+                    <Binding Source="{StaticResource ecviewDataListBind}"/>
                 </DataGrid.DataContext>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="0.5*" Binding="{Binding Path=FanNo}" IsReadOnly="True">
+                    <DataGridTextColumn Width="0.5*" Binding="{Binding Path=FanNo}" ElementStyle="{StaticResource MetroDataGridText}">
                         <DataGridTextColumn.Header>
-                            <DataGridColumnHeader Content="风扇序号"></DataGridColumnHeader>
+                            <DataGridColumnHeader Content="风扇序号" Style="{StaticResource MetroDataGridHeader}"/>
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Width="1*" Binding="{Binding Path=FanDutyStr}">
+                    <DataGridTextColumn Width="1*" Binding="{Binding Path=FanDutyStr}" ElementStyle="{StaticResource MetroDataGridText}">
                         <DataGridTextColumn.Header>
-                            <DataGridColumnHeader Content="风扇转速"></DataGridColumnHeader>
+                            <DataGridColumnHeader Content="风扇转速" Style="{StaticResource MetroDataGridHeader}"/>
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Width="1.5*" Binding="{Binding Path=FanSet}">
+                    <DataGridTextColumn Width="1*" Binding="{Binding Path=FanSet}" ElementStyle="{StaticResource MetroDataGridText}">
                         <DataGridTextColumn.Header>
-                            <DataGridColumnHeader Content="风扇当前配置"></DataGridColumnHeader>
+                            <DataGridColumnHeader Content="风扇当前配置" Style="{StaticResource MetroDataGridHeader}"/>
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
-                    <DataGridHyperlinkColumn Width="0.5*" Binding="{Binding Path=Ope}">
-                        <DataGridHyperlinkColumn.Header>
-                            <DataGridColumnHeader Content="操作"></DataGridColumnHeader>
-                        </DataGridHyperlinkColumn.Header>
-                    </DataGridHyperlinkColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

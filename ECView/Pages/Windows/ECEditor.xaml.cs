@@ -1,9 +1,8 @@
-﻿using System;
-using System.Windows;
+﻿using ECView.Module;
 using ECView.Pages.Binding;
-using ECView.Module;
+using System;
 using System.IO;
-using System.Windows.Threading;
+using System.Windows;
 
 namespace ECView.Pages.Windows
 {
@@ -14,9 +13,10 @@ namespace ECView.Pages.Windows
     {
         ECEditorBinding ecBinding;
         MainWindow main;
-        int index;
-        int fanSetModel;
         IFanDutyModify iFanDutyModify;
+        private int index;
+        private int fanSetModel;
+        private string path = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
 
         public ECEditor(MainWindow main, int index, int fanduty, int fanSetModel)
         {
@@ -38,21 +38,20 @@ namespace ECView.Pages.Windows
             int fanNo = index + 1;
             ecBinding.FanNo = "当前风扇号：" + fanNo;
             ecBinding.FanDuty = fanduty;
-            if (fanSetModel == 1)
+            switch (fanSetModel)
             {
-                AutoChkBox.IsChecked = true;
-            }
-            else if (fanSetModel == 2)
-            {
-                ManuChkBox.IsChecked = true;
-            }
-            else if (fanSetModel == 3)
-            {
-                InteChkBox.IsChecked = true;
-            }
-            else
-            {
-                ManuChkBox.IsChecked = true;
+                case 1:
+                    AutoChkBox.IsChecked = true;
+                    break;
+                case 2:
+                    ManuChkBox.IsChecked = true;
+                    break;
+                case 3:
+                    InteChkBox.IsChecked = true;
+                    break;
+                default:
+                    ManuChkBox.IsChecked = true;
+                    break;
             }
         }
         //////////////////////////////////////////////////////界面事件//////////////////////////////////////////////////////
@@ -176,12 +175,12 @@ namespace ECView.Pages.Windows
                     //风扇号
                     int fanNo = index + 1;
                     //目标文件绝对路径
-                    string targetPath = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "conf\\Configuration_" + fanNo + ".xml";
+                    string targetPath = path + "conf\\Configuration_" + fanNo + ".xml";
                     //检测目标文件夹是否存在
-                    if (!Directory.Exists(AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "conf\\"))
+                    if (!Directory.Exists(path + "conf\\"))
                     {
                         //若不存在则建立文件夹
-                        Directory.CreateDirectory(AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "conf\\");
+                        Directory.CreateDirectory(path + "conf\\");
                     }
                     //复制配置文件（覆盖同名文件）
                     File.Copy(fileDialog.FileName, targetPath, true);

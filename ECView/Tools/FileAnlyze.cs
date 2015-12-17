@@ -96,13 +96,17 @@ namespace ECView.Tools
                 {
                     lines.Add(line);
                 }
-                for (int i = 4; i < lines.Count; i++)
+                for (int i = 6; i < lines.Count; i++)
                 {
                     ConfigPara configPara = new ConfigPara();
+                    string NbModel = lines[3].Split(new char[] { '\t' })[1];
+                    string ECVersion = lines[4].Split(new char[] { '\t' })[1];
                     int fanNo = Convert.ToInt32(lines[i].Split(new char[] { '\t' })[1]);
                     int setMode = Convert.ToInt32(lines[i].Split(new char[] { '\t' })[3]);
                     string fanSet = lines[i].Split(new char[] { '\t' })[5];
                     int fanDuty = Convert.ToInt32(lines[i].Split(new char[] { '\t' })[7]);
+                    configPara.NbModel = NbModel;
+                    configPara.ECVersion = ECVersion;
                     configPara.FanNo = fanNo;
                     configPara.SetMode = setMode;
                     configPara.FanSet = fanSet;
@@ -138,6 +142,8 @@ namespace ECView.Tools
                 sw.WriteLine("#ECView");
                 sw.WriteLine("#Author YcraD");
                 sw.WriteLine("#Config File -- DO NOT EDIT!");
+                sw.WriteLine("MbModel" + "\t" + configParaList[0].NbModel);
+                sw.WriteLine("ECVersion" + "\t" + configParaList[0].ECVersion);
                 sw.WriteLine("FanCount" + "\t" + configParaList.Count);
                 foreach (ConfigPara configPara in configParaList)
                 {

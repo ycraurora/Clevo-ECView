@@ -13,6 +13,15 @@ NOTICE: This project is in Chinese(Simplified)<br />
 ==================================================================<br />
 <br />
 Update NOTE:<br />
+2015.12.17 Thur.<br />
+<br />
+1.Click once only method fixed<br />
+2.A few UI improvements<br />
+3.A few code optimization,including rewrite the inteControl method<br />
+4.Other fixes<br />
+==================================================================<br />
+<br />
+Update NOTE:<br />
 2015.12.09 Tue.<br />
 <br />
 1.Set click once only<br />

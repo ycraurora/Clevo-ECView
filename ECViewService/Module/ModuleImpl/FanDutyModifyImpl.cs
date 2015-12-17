@@ -69,8 +69,8 @@ namespace ECView.Module.ModuleImpl
                 int byteData = ecData.data;
                 byte[] ec = BitConverter.GetBytes(byteData);
                 int[] fanduty = { 0, 0, 0 };
-                fanduty[0] = (int)ec[0];
-                fanduty[1] = (int)ec[1];
+                fanduty[0] = ec[0];
+                fanduty[1] = ec[1];
                 fanduty[2] = (int)Math.Round(ec[2] / 2.55m);
                 return fanduty;
             }
@@ -154,6 +154,12 @@ namespace ECView.Module.ModuleImpl
         {
             return FileAnlyze.ReadCfgFile(filename);
         }
+        /// <summary>
+        /// 智能控制
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="fanNo"></param>
+        /// <returns></returns>
         public bool InteFandutyControl(string filePath, int fanNo)
         {
             bool state = _inteFandutyControl(filePath, fanNo);
@@ -190,126 +196,125 @@ namespace ECView.Module.ModuleImpl
             int[] ecData = GetTempFanDuty(intePara.FanNo);
             if (intePara.ControlType == 1)
             {
-                for (int i = 0; i < intePara.RangeParaList.Count; i++)
-                {
-                    if (i == 0)
-                    {
-                        //若小于最小温度，设置风扇转速为最小值
-                        if (ecData[0] < intePara.RangeParaList[i].InferiorLimit)
-                        {
-                            SetFanduty(intePara.FanNo, (int)((intePara.MinFanDuty > 100 ? 100 : intePara.MinFanDuty) * 2.55m), false);
-                        }
-                        else if (ecData[0] >= intePara.RangeParaList[i].InferiorLimit && ecData[0] < intePara.RangeParaList[i + 1].InferiorLimit)
-                        {
-                            if (intePara.RangeParaList[i].FanDuty < intePara.MinFanDuty)
-                            {
-                                SetFanduty(intePara.FanNo, (int)((intePara.MinFanDuty > 100 ? 100 : intePara.MinFanDuty) * 2.55m), false);
-                            }
-                            else
-                            {
-                                SetFanduty(intePara.FanNo, (int)((intePara.RangeParaList[i].FanDuty > 100 ? 100 : intePara.RangeParaList[i].FanDuty) * 2.55m), false);
-                            }
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                    }
-                    else if (i != intePara.RangeParaList.Count - 1)
-                    {
-                        if (ecData[0] >= intePara.RangeParaList[i].InferiorLimit && ecData[0] < intePara.RangeParaList[i + 1].InferiorLimit)
-                        {
-                            if (intePara.RangeParaList[i].FanDuty < intePara.MinFanDuty)
-                            {
-                                SetFanduty(intePara.FanNo, (int)((intePara.MinFanDuty > 100 ? 100 : intePara.MinFanDuty) * 2.55m), false);
-                            }
-                            else
-                            {
-                                SetFanduty(intePara.FanNo, (int)((intePara.RangeParaList[i].FanDuty > 100 ? 100 : intePara.RangeParaList[i].FanDuty) * 2.55m), false);
-                            }
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                    }
-                    else if (i == intePara.RangeParaList.Count - 1)
-                    {
-                        if (ecData[0] >= intePara.RangeParaList[i].InferiorLimit)
-                        {
-                            if (intePara.RangeParaList[i].FanDuty < intePara.MinFanDuty)
-                            {
-                                SetFanduty(intePara.FanNo, (int)((intePara.MinFanDuty > 100 ? 100 : intePara.MinFanDuty) * 2.55m), false);
-                            }
-                            else
-                            {
-                                SetFanduty(intePara.FanNo, (int)((intePara.RangeParaList[i].FanDuty > 100 ? 100 : intePara.RangeParaList[i].FanDuty) * 2.55m), false);
-                            }
-                        }
-                    }
-                }
+                _inteControl(intePara, ecData);
             }
             else if (intePara.ControlType == 2)
             {
-                for (int i = 0; i < intePara.RangeParaList.Count; i++)
+                _inteControl(intePara, ecData);
+            }
+        }
+        /// <summary>
+        /// 智能控制方案
+        /// </summary>
+        /// <param name="intePara"></param>
+        /// <param name="ecData"></param>
+        private void _inteControl(IntePara intePara, int[] ecData)
+        {
+            int count = intePara.RangeParaList.Count;//风扇数量
+            int fanNo = intePara.FanNo;//风扇号
+            int minFanDuty = _checkFanDuty(intePara.MinFanDuty, 100, 2);//最小转速
+            for (int i = 0; i < count; i++)
+            {
+                RangePara rp = intePara.RangeParaList[i];//当前遍历标签
+                int fanDuty = 0;//目标转速
+                if (intePara.ControlType == 1)//方案一
                 {
-                    if (i == 0)
+                    fanDuty = _checkFanDuty(rp.FanDuty, 100, 2);
+                }
+                else if (intePara.ControlType == 2)//方案二
+                {
+                    fanDuty = _checkFanDuty(rp.AddPercentage + ecData[0], 100, 2);
+                }
+                int inferiorLimit = rp.InferiorLimit;//当前标签温度下限
+                if (i == 0)
+                {
+                    //若小于最小温度，设置风扇转速为最小值
+                    if (ecData[0] < inferiorLimit)
                     {
-                        //若小于最小温度，设置风扇转速为最小值
-                        if (ecData[0] < intePara.RangeParaList[i].InferiorLimit)
-                        {
-                            SetFanduty(intePara.FanNo, (int)((intePara.MinFanDuty > 100 ? 100 : intePara.MinFanDuty) * 2.55m), false);
-                        }
-                        else if (ecData[0] > intePara.RangeParaList[i].InferiorLimit && ecData[0] < intePara.RangeParaList[i + 1].InferiorLimit)
-                        {
-                            if ((intePara.RangeParaList[i].AddPercentage + ecData[0]) < intePara.MinFanDuty)
-                            {
-                                SetFanduty(intePara.FanNo, (int)((intePara.MinFanDuty > 100 ? 100 : intePara.MinFanDuty) * 2.55m), false);
-                            }
-                            else
-                            {
-                                SetFanduty(intePara.FanNo, (int)(((intePara.RangeParaList[i].AddPercentage + ecData[0]) > 100 ? 100 : (intePara.RangeParaList[i].AddPercentage + ecData[0])) * 2.55m), false);
-                            }
-                        }
-                        else
-                        {
-                            continue;
-                        }
+                        SetFanduty(intePara.FanNo, _parseFanDuty(minFanDuty), false);
                     }
-                    else if (i != intePara.RangeParaList.Count - 1)
+                    else if (_checkLogicalAnd(ecData[0], inferiorLimit, intePara.RangeParaList[i + 1].InferiorLimit))
                     {
-                        if (ecData[0] > intePara.RangeParaList[i].InferiorLimit && ecData[0] < intePara.RangeParaList[i + 1].InferiorLimit)
-                        {
-                            if ((intePara.RangeParaList[i].AddPercentage + ecData[0]) < intePara.MinFanDuty)
-                            {
-                                SetFanduty(intePara.FanNo, (int)((intePara.MinFanDuty > 100 ? 100 : intePara.MinFanDuty) * 2.55m), false);
-                            }
-                            else
-                            {
-                                SetFanduty(intePara.FanNo, (int)(((intePara.RangeParaList[i].AddPercentage + ecData[0]) > 100 ? 100 : (intePara.RangeParaList[i].AddPercentage + ecData[0])) * 2.55m), false);
-                            }
-                        }
-                        else
-                        {
-                            continue;
-                        }
+                        _compareFanDuty(fanNo, minFanDuty, fanDuty);
                     }
-                    else if (i == intePara.RangeParaList.Count - 1)
+                    else
                     {
-                        if (ecData[0] >= intePara.RangeParaList[i].InferiorLimit)
-                        {
-                            if ((intePara.RangeParaList[i].AddPercentage + ecData[0]) < intePara.MinFanDuty)
-                            {
-                                SetFanduty(intePara.FanNo, (int)((intePara.MinFanDuty > 100 ? 100 : intePara.MinFanDuty) * 2.55m), false);
-                            }
-                            else
-                            {
-                                SetFanduty(intePara.FanNo, (int)(((intePara.RangeParaList[i].AddPercentage + ecData[0]) > 100 ? 100 : (intePara.RangeParaList[i].AddPercentage + ecData[0])) * 2.55m), false);
-                            }
-                        }
+                        continue;
+                    }
+                }
+                else if (i != count - 1)
+                {
+                    if (_checkLogicalAnd(ecData[0], inferiorLimit, intePara.RangeParaList[i + 1].InferiorLimit))
+                    {
+                        _compareFanDuty(fanNo, minFanDuty, fanDuty);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else if (i == count - 1)
+                {
+                    if (ecData[0] >= inferiorLimit)
+                    {
+                        _compareFanDuty(fanNo, minFanDuty, fanDuty);
                     }
                 }
             }
+        }
+        /// <summary>
+        /// 风扇转速逻辑判断
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <param name="op"></param>
+        /// <returns></returns>
+        private int _checkFanDuty(int first, int second, int op)
+        {
+            int output = 0;
+            switch (op)
+            {
+                case 1:
+                    output = first > second ? first : second;
+                    break;
+                case 2:
+                    output = first > second ? second : first;
+                    break;
+                default:
+                    break;
+            }
+            return output;
+        }
+        /// <summary>
+        /// 风扇转速格式转换
+        /// </summary>
+        /// <param name="fanDuty"></param>
+        /// <returns></returns>
+        private int _parseFanDuty(int fanDuty)
+        {
+            return (int)(fanDuty * 2.55m);
+        }
+        /// <summary>
+        /// 风扇转速区间判断
+        /// </summary>
+        /// <param name="fanNo"></param>
+        /// <param name="minFanDuty"></param>
+        /// <param name="fanDuty"></param>
+        private void _compareFanDuty(int fanNo, int minFanDuty, int fanDuty)
+        {
+            int duty = _checkFanDuty(minFanDuty, fanDuty, 1);
+            SetFanduty(fanNo, _parseFanDuty(duty), false);
+        }
+        /// <summary>
+        /// 温度区间逻辑判断
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        private bool _checkLogicalAnd(int a, int b, int c)
+        {
+            return a >= b && a < c;
         }
         /// <summary>
         /// 更新风扇转速状态

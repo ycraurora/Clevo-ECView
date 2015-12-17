@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ECView.DataDefinitions
+﻿namespace ECView.DataDefinitions
 {
     public class ConfigPara
     {
         /// <summary>
-        /// 是否自启动
+        /// 主板型号
         /// </summary>
-        public bool IsAutoRun
+        public string NbModel
         {
             get;
             set;
         }
         /// <summary>
-        /// 是否最小化到托盘
+        /// EC版本
         /// </summary>
-        public bool IsBackRun
+        public string ECVersion
         {
             get;
             set;

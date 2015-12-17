@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.Win32;
 using System.ServiceProcess;
 
 namespace ECView.Tools

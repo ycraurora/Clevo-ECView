@@ -8,6 +8,9 @@ using System.Management;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace ECView
 {
@@ -17,16 +20,16 @@ namespace ECView
     public partial class MainWindow : Window
     {
         //ECViewService状态
-        int status = 0;
-        string serviceName = "ECViewService";
+        private int status = 0;
+        private string serviceName = "ECViewService";
         //设置行号
-        int index;
+        private int index;
         //主窗口绑定
         ECViewBinding ecviewData = null;
         //数据列表绑定
         ECViewCollec ecviewDataList = null;
         //当前工作目录
-        string currentDirectory = "";
+        private string currentDirectory = "";
         //线程任务
         Task<int> tempGetter = null;
         //功能接口
@@ -42,7 +45,7 @@ namespace ECView
             }
         }
         //模具型号
-        ManagementObjectSearcher Searcher_BaseBoard = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_BaseBoard");
+        ManagementObjectSearcher Searcher_BaseBoard;
         //风扇数量
         private int FANCount=0;
         
@@ -87,21 +90,6 @@ namespace ECView
         /// </summary>
         private void InitECData()
         {
-            //模具型号
-            ecviewData.NbModel = "当前模具型号为：";
-            foreach (var baseBoard in Searcher_BaseBoard.Get())
-                ecviewData.NbModel += Convert.ToString((baseBoard)["Product"]);
-
-            //EC版本
-            ecviewData.ECVersion = "当前EC版本为：1.";
-            ecviewData.ECVersion += iFanDutyModify.GetECVersion();
-
-            //风扇数量
-            FANCount = iFanDutyModify.GetFanCount();
-            if (FANCount > 4)
-                FANCount = 0;
-            if (FANCount == 0)
-                FANCount = 1;
             //判断配置文件是否存在
             if (System.IO.File.Exists(currentDirectory + "ecview.cfg"))
             {
@@ -109,7 +97,9 @@ namespace ECView
                 //风扇转速与温度信息
                 for (int i = 0; i < configParaList.Count; i++)
                 {
-                    int[] ecData = iFanDutyModify.GetTempFanDuty(i + 1);
+                    int[] ecData= { 0,0,0 };// = iFanDutyModify.GetTempFanDuty(i + 1);
+                    ecviewData.NbModel = configParaList[0].NbModel;
+                    ecviewData.ECVersion = configParaList[0].ECVersion;
                     ecviewData.FanNo = i + 1;
                     foreach (ConfigPara configPara in configParaList)
                     {
@@ -135,12 +125,25 @@ namespace ECView
                     ecviewData.UpdateFlag = false;
                     ecviewData.FanDutyStr = ecData[2] + "%";
                     ecviewData.FanDuty = ecData[2];
-                    ecviewData.Ope = "设置";
                     ecviewDataList.Add(ecviewData);
                 }
             }
             else
             {
+                Searcher_BaseBoard = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_BaseBoard");
+                //模具型号
+                ecviewData.NbModel = "当前模具型号为：";
+                foreach (var baseBoard in Searcher_BaseBoard.Get())
+                ecviewData.NbModel += Convert.ToString((baseBoard)["Product"]);
+                //EC版本
+                ecviewData.ECVersion = "当前EC版本为：1.";
+                ecviewData.ECVersion += iFanDutyModify.GetECVersion();
+                //风扇数量
+                FANCount = iFanDutyModify.GetFanCount();
+                if (FANCount > 4)
+                    FANCount = 0;
+                if (FANCount == 0)
+                    FANCount = 1;
                 //风扇转速与温度信息
                 for (int i = 0; i < FANCount; i++)
                 {
@@ -152,7 +155,6 @@ namespace ECView
                     ecviewData.FanNo = i + 1;
                     ecviewData.FanSet = "未设置";
                     ecviewData.FanSetModel = 0;
-                    ecviewData.Ope = "设置";
                     ecviewData.UpdateFlag = false;
                     ecviewDataList.Add(ecviewData);
                 }
@@ -195,6 +197,8 @@ namespace ECView
                     foreach (ECViewBinding ec in ecviewDataList)
                     {
                         ConfigPara configPara = new ConfigPara();
+                        configPara.NbModel = ec.NbModel;
+                        configPara.ECVersion = ec.ECVersion;
                         configPara.FanNo = ec.FanNo;
                         configPara.SetMode = ec.FanSetModel;
                         configPara.FanSet = ec.FanSet;
@@ -208,16 +212,35 @@ namespace ECView
         }
         ////////////////////////////////////////////////////////界面事件////////////////////////////////////////////////////////
         /// <summary>
-        /// DataGrid点击事件
+        /// DataGrid行点击事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ECEditor_Click(object sender, RoutedEventArgs e)
+        private void ECDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //读取选择的参数行
-            var datagrid = sender as System.Windows.Controls.DataGrid;
-            index = datagrid.SelectedIndex;
-            ECViewBinding selectFan = (ECViewBinding)datagrid.SelectedItem;
+            Point aP = e.GetPosition(ECDataGrid);
+            IInputElement obj = ECDataGrid.InputHitTest(aP);
+            DependencyObject target = obj as DependencyObject;
+
+            while (target != null)
+            {
+                if (target is DataGridRow)
+                {
+                    break;
+                }
+                target = VisualTreeHelper.GetParent(target);
+            }
+            if(target != null)
+            {
+                _ecEditorLoader(target as DataGridRow);
+            }
+        }
+
+        private void _ecEditorLoader(DataGridRow row)
+        {
+            //读取选择行的参数
+            index = row.GetIndex();
+            ECViewBinding selectFan = (ECViewBinding)row.Item;
             int fanduty = iFanDutyModify.GetTempFanDuty(index + 1)[2];
             //加载窗体
             ECEditor ecWindow = new ECEditor(this, index, fanduty, selectFan.FanSetModel);
@@ -230,7 +253,7 @@ namespace ECView
         /// <param name="e"></param>
         private void About_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.MessageBox.Show("ECView\n版本：" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() +
+            MessageBox.Show("ECView\n版本：" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() +
                 "\n作者：YcraD\n鸣谢：特别的帅（神舟笔记本吧）\n说明：本程序主要实现Clevo模具风扇转速控制，部分灵感来源于“特别的帅”，在此感谢",
                 "关于", MessageBoxButton.OK, MessageBoxImage.Information);
         } 
@@ -265,6 +288,7 @@ namespace ECView
                         ecviewDataList[i].FanDutyStr = ecviewDataList[i].FanDuty + "%";
                     }
                     ecviewData.CpuRemote = temp[0] + "℃";
+                    ecviewData.CpuLocal = temp[1] + "℃";
                     Thread.Sleep(5000);
                 }
             }

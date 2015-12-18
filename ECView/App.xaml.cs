@@ -32,7 +32,7 @@ namespace ECView
             }*/
             bool requestInitialOwnership = true;
             bool mutexWasCreated;
-            mut = new Mutex(requestInitialOwnership, "com.Application1.Ding", out mutexWasCreated);
+            mut = new Mutex(requestInitialOwnership, "com.ECView.Ding", out mutexWasCreated);
             if (!(requestInitialOwnership && mutexWasCreated))
             {
                 // 随意什么操作啦~

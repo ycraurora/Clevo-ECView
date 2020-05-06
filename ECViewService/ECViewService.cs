@@ -32,33 +32,29 @@ namespace ECViewService
             //判断配置文件是否存在
             if (System.IO.File.Exists(currentDirectory + "ecview.cfg"))
             {
-                foreach (ConfigPara configPara in configParaList)
+                while (true)
                 {
-                    if (configPara.SetMode == 1)
+                    //线程暂停10s
+                    Thread.Sleep(10 * 1000);
+                    foreach (ConfigPara configPara in configParaList)
                     {
-                        //若配置为自动调节，设置风扇自动调节
-                        iFanDutyModify.SetFanduty(configPara.FanNo, 0, true);
-                    }
-                    else if (configPara.SetMode == 2)
-                    {
-                        //若配置为手动调节，设置风扇转速
-                        iFanDutyModify.SetFanduty(configPara.FanNo, (int)(configPara.FanDuty * 2.55m), false);
-                    }
-                    else if (configPara.SetMode == 3)
-                    {
-                        while (true)
+                        if (configPara.SetMode == 1)
                         {
-                            //线程暂停10s
-                            Thread.Sleep(10 * 1000);
+                            //若配置为自动调节，设置风扇自动调节
+                            iFanDutyModify.SetFanduty(configPara.FanNo, 0, true);
+                        }
+                        else if (configPara.SetMode == 2)
+                        {
+                            //若配置为手动调节，设置风扇转速
+                            iFanDutyModify.SetFanduty(configPara.FanNo, (int)(configPara.FanDuty * 2.55m), false);
+                        }
+                        else if (configPara.SetMode == 3)
+                        {
                             //若配置为智能调节，设置风扇转速
                             iFanDutyModify.InteFandutyControl(currentDirectory + "conf\\Configuration_" + configPara.FanNo + ".xml", configPara.FanNo);
                         }
-
                     }
-                    else { }
                 }
-                configParaList = null;
-                return;
             }
         }
         /// <summary>
